@@ -3,6 +3,10 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Student;
+use App\User;
+use App\Classe;
+
+
 use Faker\Generator as Faker;
 
 $factory->define(Student::class, function (Faker $faker) {

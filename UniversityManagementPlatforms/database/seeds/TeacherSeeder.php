@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\Teacher;
 class TeacherSeeder extends Seeder
 {
     /**
@@ -11,6 +11,7 @@ class TeacherSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(Teacher::class, 35)->create();
+
     }
 }

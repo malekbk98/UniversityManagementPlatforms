@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Departement::class, function (Faker $faker) {
     return [
-        'departement_name' => $faker->subject,
+        'departement_name' => $faker->sentence,
         'created_at' => now(),
         'updated_at' => now(),
     ];

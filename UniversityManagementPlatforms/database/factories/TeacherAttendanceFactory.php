@@ -3,6 +3,9 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\TeacherAttendance;
+use App\Teacher;
+use App\Lesson;
+
 use Faker\Generator as Faker;
 
 $factory->define(TeacherAttendance::class, function (Faker $faker) {
@@ -10,7 +13,7 @@ $factory->define(TeacherAttendance::class, function (Faker $faker) {
         'lesson_id' => Lesson::get('id')->random(),
         'teacher_id' => Teacher::get('id')->random(),
         'status' => $faker->word,
-        'check_in' => $faker->time,
+        'check_in' => now(),
         'created_at' => now(),
         'updated_at' => now(),
     ];

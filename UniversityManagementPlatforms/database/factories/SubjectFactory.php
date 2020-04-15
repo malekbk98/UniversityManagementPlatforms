@@ -3,12 +3,13 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Subject;
+use App\Teacher;
 use Faker\Generator as Faker;
 
 $factory->define(Subject::class, function (Faker $faker) {
     return [
         'teacher_id' => Teacher::get('id')->random(),
-        'subject_name' => $faker->subject,
+        'subject_name' => $faker->sentence,
         'subject_cof' => $faker->randomFloat(10, 1, 10),
         'subject_max_abs' => $faker->randomDigitNot(5),
         'subject_type' => $faker->word,
