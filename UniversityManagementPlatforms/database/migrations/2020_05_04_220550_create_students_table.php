@@ -19,7 +19,8 @@ class CreateStudentsTable extends Migration
             $table->foreign('classe_id')->references('id')->on('classes');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('review');
+            $table->integer('total_review');
+            $table->integer('nbr_review');
             $table->timestamps();
         });
     }

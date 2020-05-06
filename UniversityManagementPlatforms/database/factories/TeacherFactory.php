@@ -13,7 +13,8 @@ $factory->define(Teacher::class, function (Faker $faker) {
         'salary' => $faker->numberBetween($min = 1000, $max = 9000),
         'start_date' => $faker->date,
         'position' => $faker->jobTitle,
-        'review' => $faker->randomDigitNot(5),
+        'total_review' => $faker->randomDigitNot(5),
+        'nbr_review' => $faker->randomDigitNot(5),
         'created_at' => now(),
         'updated_at' => now(),
     ];

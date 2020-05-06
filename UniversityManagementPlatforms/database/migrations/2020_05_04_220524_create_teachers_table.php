@@ -19,11 +19,14 @@ class CreateTeachersTable extends Migration
             $table->double('salary', 8, 3);
             $table->date('start_date');
             $table->string('position');
-            $table->integer('review');
+            $table->integer('total_review');
+            $table->integer('nbr_review');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
+ 
+
 
     /**
      * Reverse the migrations.

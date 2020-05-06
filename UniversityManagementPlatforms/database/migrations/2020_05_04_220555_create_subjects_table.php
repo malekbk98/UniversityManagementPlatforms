@@ -21,7 +21,8 @@ class CreateSubjectsTable extends Migration
             $table->double('subject_cof');
             $table->integer('subject_max_abs');
             $table->string('subject_type');
-            $table->integer('review');
+            $table->integer('total_review');
+            $table->integer('nbr_review');
             $table->timestamps();
         });
     }
