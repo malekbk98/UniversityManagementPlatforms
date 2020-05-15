@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Student;
+use App\User;
 use App\StudentAttendance;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentAttendanceController extends Controller
 {
@@ -14,7 +16,9 @@ class StudentAttendanceController extends Controller
      */
     public function index()
     {
-        //
+        $studentatt =auth::user()->students()->join ('student_attendances','student_id','=','students.id')->join('lessons', 'lessons.id', '=', 'student_attendances.lesson_id')->join('subjects', 'subjects.id', '=', 'lessons.subject_id')->get();
+    return view ('student_attendance.index',compact ('studentatt'));
+
     }
 
     /**
@@ -24,7 +28,7 @@ class StudentAttendanceController extends Controller
      */
     public function create()
     {
-        //
+        return view('student_attendance.add');
     }
 
     /**
@@ -35,7 +39,19 @@ class StudentAttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user_id= Auth::id();
+        $student_id= Student::where('user_id', '=', $stid)->pluck('id');
+      //  $request->validate([
+           // 'check_in' => 'required',
+         //   'status'=> 'required'
+     //   ]);
+        $student_attendance = new StudentAttendance;
+        $student_attendance ->student_id = $student_id[1];
+        $student_attendance ->lesson_id = 17;
+        $student_attendance ->check_in = now() ;
+        $student_attendance =$request->status;
+        $student_attendance -> save();
+        return redirect()->route('student_attendance.index');
     }
 
     /**
