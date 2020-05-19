@@ -46,7 +46,8 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        //
+        $data=$student;
+        return view('admin.report',compact('data'));
     }
 
     /**

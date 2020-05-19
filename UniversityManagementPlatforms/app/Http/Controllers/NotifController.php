@@ -38,8 +38,11 @@ class NotifController extends Controller
         $data = $request->validate($this->validationRules());
         $data['status']='new';
         $notif = Notif::create($data);
-        return redirect('/teachers_review')->with('alert', 'Notification Sent!');
-
+        if(str_contains(redirect()->back()->content(),'student')){
+            return redirect('/students_review')->with('alert', 'Notification Sent!');
+        }else{
+            return redirect('/teachers_review')->with('alert', 'Notification Sent!');
+        }
     }
 
     /**

@@ -46,7 +46,7 @@ class SubjectController extends Controller
      */
     public function show(Subject $subject)
     {
-        //
+        
     }
 
     /**
@@ -81,5 +81,10 @@ class SubjectController extends Controller
     public function destroy(Subject $subject)
     {
         //
+    }
+    public function reviews()
+    {
+        $data = Subject::paginate(10);       
+        return view('admin.subjects_reviews',compact('data'));
     }
 }

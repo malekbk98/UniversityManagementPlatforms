@@ -155,13 +155,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{route('students.reviews')}}" class="nav-link {{(\Request::is('students')) ? 'active' : '' }}">
+              <a href="{{route('students_review.reviews')}}" class="nav-link {{(\Request::is('students_review')) ? 'active' : '' }}">
                 <i class="fas fa-user-graduate"></i>
                 <p>Students Reviews</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{route('subjects.reviews')}}" class="nav-link">
+              <a href="{{route('subjects_review.reviews')}}" class="nav-link {{(\Request::is('subjects_review')) ? 'active' : '' }}">
                 <i class="fas fa-flask"></i>
                 <p>Subjects Reviews</p>
               </a>

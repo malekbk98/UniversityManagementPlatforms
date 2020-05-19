@@ -22,7 +22,7 @@
                   <div class="card-body">
                     <div class="form-group col-md-10">
                       <label for="title">Title</label>
-                      <input type="text" value="{{$teacher->user_id}}" style="display: none" name="user_id">
+                      <input type="text" value="{{$data->user_id}}" style="display: none" name="user_id">
                       @error('user_id')<div class="text-danger">{{ $message }}</div> @enderror
                       <input type="text" class="form-control" name="title" id="title" placeholder="Title" Value="Administration: Bad Review Report" required>
                       @error('title')<div class="text-danger">{{ $message }}</div> @enderror

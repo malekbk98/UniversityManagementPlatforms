@@ -5,7 +5,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Students Reviews</h1>
+              <h1>Subjects Reviews</h1>
             </div>
           </div>
         </div>
@@ -24,18 +24,21 @@
                   <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th>Name</th>
-                        <th>Email</th>
+                        <th>Subject Name</th>
+                        <th>Cof</th>
+                        <th>N°:Absences</th>
+                        <th>Type</th>
                         <th>Review</th>
                         <th>Review Numbers</th>
-                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       @foreach($data as $details)
                       <tr>
-                      <td>{{$details->user->first_name}} {{$details->user->last_name}}</td>
-                        <td>{{$details->user->email}}</td>
+                      <td>{{$details->subject_name}}</td>
+                        <td>{{$details->subject_cof}}</td>
+                        <td>{{$details->subject_max_abs}}</td>
+                        <td>{{$details->subject_type}}</td>
                         <td width='20%' style="color:orange">
                           @if($details->nbr_review==0)
                           <span class="badge badge-warning">No Reviews</span>
@@ -52,16 +55,11 @@
                           <span class="badge badge-warning">No Reviews</span>
                         @endif
                         </td>
-                        <td>
-                          @if($i<3)
-                          <a href="{{ route('students.show',$details->id)}}">
-                            <button class="btn btn-danger">Report</button></a>
-                          @endif
-                        </td>
                       </tr>
                       @endforeach
                     </tbody>
                   </table>
+                  {{$data->links()}}
                 </div>
               </div>
             </div>

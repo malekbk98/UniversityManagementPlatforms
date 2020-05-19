@@ -24,12 +24,9 @@ Route::resource ('/student_attendance', 'StudentAttendanceController');
 //Admin Routes
 
 Route::get ('/teachers_review','TeacherController@reviews')->name('teachers_review.reviews');
+Route::resource ('/teachers','TeacherController');
 Route::get ('/students_review','StudentController@reviews')->name('students_review.reviews');
-
+Route::resource ('/students','StudentController');
+Route::get ('/subjects_review','SubjectController@reviews')->name('subjects_review.reviews');
 
 Route::post ('/store_report','NotifController@store')->name('notif.report');
-
-Route::resource ('/teachers','TeacherController');
-Route::get ('/students','StudentController@reviews')->name('students.reviews');
-Route::get ('/subjects','SubjectController@reviews')->name('subjects.reviews');
-
