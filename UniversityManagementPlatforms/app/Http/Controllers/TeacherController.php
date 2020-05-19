@@ -86,13 +86,8 @@ class TeacherController extends Controller
     }
     public function reviews()
     {
-        $data = Teacher::with('user')->get();        
+        $data = Teacher::with('user')->get();       
         return view('admin.teachers_reviews',compact('data'));
-    }
-
-    public function report(Request $request)
-    {
-        dd($request);
     }
     
 }

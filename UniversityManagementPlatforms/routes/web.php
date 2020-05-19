@@ -24,6 +24,9 @@ Route::resource ('/student_attendance', 'StudentAttendanceController');
 //Admin Routes
 
 Route::get ('/teachers_review','TeacherController@reviews')->name('teachers_review.reviews');
+Route::get ('/students_review','StudentController@reviews')->name('students_review.reviews');
+
+
 Route::post ('/store_report','NotifController@store')->name('notif.report');
 
 Route::resource ('/teachers','TeacherController');

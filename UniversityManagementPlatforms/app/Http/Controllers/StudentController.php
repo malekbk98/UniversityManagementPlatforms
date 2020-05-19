@@ -82,4 +82,9 @@ class StudentController extends Controller
     {
         //
     }
+    public function reviews()
+    {
+        $data = Student::with('user')->get();       
+        return view('admin.students_reviews',compact('data'));
+    }
 }
