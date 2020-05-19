@@ -19,3 +19,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource ('/student_attendance', 'StudentAttendanceController');
+
+
+//Admin Routes
+
+Route::get ('/teachers_review','TeacherController@reviews')->name('teachers_review.reviews');
+Route::post ('/store_report','NotifController@store')->name('notif.report');
+
+Route::resource ('/teachers','TeacherController');
+Route::get ('/students','StudentController@reviews')->name('students.reviews');
+Route::get ('/subjects','SubjectController@reviews')->name('subjects.reviews');
+

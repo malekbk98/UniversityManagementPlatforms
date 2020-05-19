@@ -107,9 +107,17 @@
             <a href="#" class="dropdown-item">
                 <i class="fas fa-user-alt"></i>  Profile
             </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-                <i class="fas fa-sign-out-alt"></i> Logout
+            <div class="dropdown-divider"></div> 
+              <a class="dropdown-item" href="'{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                     <i class="fas fa-sign-out-alt"></i>
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form></li>
             </a>       
       </li>
     </ul>
@@ -130,16 +138,37 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link {{(\Request::is('home')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
+          @if (auth::user()->position=='admin')
+          <li class="nav-header">Check Reviews</li>
+            <li class="nav-item">
+              <a href="{{route('teachers_review.reviews')}}" class="nav-link {{(\Request::is('teachers_review')) ? 'active' : '' }}">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <p>Teachers Reviews</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('students.reviews')}}" class="nav-link {{(\Request::is('students')) ? 'active' : '' }}">
+                <i class="fas fa-user-graduate"></i>
+                <p>Students Reviews</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('subjects.reviews')}}" class="nav-link">
+                <i class="fas fa-flask"></i>
+                <p>Subjects Reviews</p>
+              </a>
+            </li>
+          @else
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="{{asset('pages/widgets.html')}}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
@@ -362,14 +391,6 @@
               <p>
                 Calendar
                 <span class="badge badge-info right">2</span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{asset('pages/gallery.html')}}" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
-              <p>
-                Gallery
               </p>
             </a>
           </li>
@@ -635,7 +656,9 @@
               <p>Informational</p>
             </a>
           </li>
-        </ul>
+        
+        @endif
+      </ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -647,14 +670,6 @@
     @yield('content')
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.4
-    </div>
-  </footer>
-
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->

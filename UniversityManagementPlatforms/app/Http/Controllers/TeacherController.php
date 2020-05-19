@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Teacher;
+use App\User;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
@@ -46,7 +47,8 @@ class TeacherController extends Controller
      */
     public function show(Teacher $teacher)
     {
-        //
+        return view('admin.report',compact('teacher'));
+
     }
 
     /**
@@ -57,7 +59,7 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        //
+
     }
 
     /**
@@ -82,4 +84,15 @@ class TeacherController extends Controller
     {
         //
     }
+    public function reviews()
+    {
+        $data = Teacher::with('user')->get();        
+        return view('admin.teachers_reviews',compact('data'));
+    }
+
+    public function report(Request $request)
+    {
+        dd($request);
+    }
+    
 }

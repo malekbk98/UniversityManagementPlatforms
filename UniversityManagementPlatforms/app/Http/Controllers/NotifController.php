@@ -35,7 +35,11 @@ class NotifController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate($this->validationRules());
+        $data['status']='new';
+        $notif = Notif::create($data);
+        return redirect('/teachers_review')->with('alert', 'Notification Sent!');
+
     }
 
     /**
@@ -81,5 +85,13 @@ class NotifController extends Controller
     public function destroy(Notif $notif)
     {
         //
+    }
+    private function validationRules()
+    {
+        return [
+            'title' => 'required|string',
+            'message' => 'required|string',
+            'user_id' => 'required|string',            
+        ];
     }
 }
