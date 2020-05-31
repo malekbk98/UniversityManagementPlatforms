@@ -28,5 +28,6 @@ Route::resource ('/teachers','TeacherController');
 Route::get ('/students_review','StudentController@reviews')->name('students_review.reviews');
 Route::resource ('/students','StudentController');
 Route::get ('/subjects_review','SubjectController@reviews')->name('subjects_review.reviews');
+Route::get ('/students_lists','StudentController@lists')->name('students_lists.lists');
 
 Route::post ('/store_report','NotifController@store')->name('notif.report');

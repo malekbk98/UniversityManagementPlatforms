@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Student;
+use App\Classe;
+use App\Department;
+use DB;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -88,4 +91,16 @@ class StudentController extends Controller
         $data = Student::with('user')->get();       
         return view('admin.students_reviews',compact('data'));
     }
+    public function lists()
+    {
+        $data = DB::table('students')
+        ->join('users','users.id','=','students.user_id')
+        ->join('classes','classes.id','=','students.classe_id')
+        ->join('departments','departments.id','=','classes.department_id')
+        ->get();
+        $cls=Classe::select('classe_name','specialite')->get();
+        $dep=Department::select('department_name')->get();
+        return view('admin.student_lists',compact('data','cls','dep'));
+    }
+
 }

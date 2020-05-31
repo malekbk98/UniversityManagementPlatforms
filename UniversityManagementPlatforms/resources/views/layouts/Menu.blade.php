@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>University Management Platform </title>
+  <link rel="stylesheet" href="{{asset('css/custom_css.css')}}">
+
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -164,6 +166,13 @@
               <a href="{{route('subjects_review.reviews')}}" class="nav-link {{(\Request::is('subjects_review')) ? 'active' : '' }}">
                 <i class="fas fa-flask"></i>
                 <p>Subjects Reviews</p>
+              </a>
+            </li>
+            <li class="nav-header">Students Lists</li>
+            <li class="nav-item">
+              <a href="{{route('students_lists.lists')}}" class="nav-link {{(\Request::is('students_lists')) ? 'active' : '' }}">
+                <i class="fas fa-users"></i>
+                <p>Students List</p>
               </a>
             </li>
           @else
@@ -656,7 +665,6 @@
               <p>Informational</p>
             </a>
           </li>
-        
         @endif
       </ul>
       </nav>
@@ -712,5 +720,7 @@
 <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
+<script src="{{asset('js/table.js')}}"></script>
+
 </body>
 </html>
