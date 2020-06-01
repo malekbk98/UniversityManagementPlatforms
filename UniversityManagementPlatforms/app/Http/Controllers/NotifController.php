@@ -34,12 +34,32 @@ class NotifController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         $data = $request->validate($this->validationRules());
         $data['status']='new';
         $notif = Notif::create($data);
         if(str_contains(redirect()->back()->content(),'student')){
             return redirect('/students_review')->with('alert', 'Notification Sent!');
+        }else{
+            return redirect('/teachers_review')->with('alert', 'Notification Sent!');
+        }
+    }
+
+
+    public function notif_group(Request $request)
+    { 
+        $data = $request->validate($this->GrpvalidationRules());
+        $ids=$data['checked'];
+        $aux['message']=$data['message'];
+        $aux['title']=$data['title'];
+        $aux['status']='new';
+        $aux['user_id']=null;
+        foreach($ids as $id){
+            $aux['user_id']=$id;
+            Notif::create($aux);
+        }
+        if(str_contains(redirect()->back()->content(),'student')){
+            return redirect('/students_lists')->with('alert', 'Notification Sent!');
         }else{
             return redirect('/teachers_review')->with('alert', 'Notification Sent!');
         }
@@ -95,6 +115,14 @@ class NotifController extends Controller
             'title' => 'required|string',
             'message' => 'required|string',
             'user_id' => 'required|string',            
+        ];
+    }
+    private function GrpvalidationRules()
+    {
+        return [
+            'title' => 'required|string',
+            'message' => 'required|string',
+            'checked' => 'required',
         ];
     }
 }

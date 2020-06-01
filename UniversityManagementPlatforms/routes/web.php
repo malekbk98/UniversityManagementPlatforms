@@ -31,3 +31,5 @@ Route::get ('/subjects_review','SubjectController@reviews')->name('subjects_revi
 Route::get ('/students_lists','StudentController@lists')->name('students_lists.lists');
 
 Route::post ('/store_report','NotifController@store')->name('notif.report');
+
+Route::post ('/notif_grp','NotifController@notif_group')->name('notif_grp.notif_group');;

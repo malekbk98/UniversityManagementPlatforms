@@ -56,3 +56,44 @@ function search(n,t){
     }
 }
 
+function checkAll(ele) {
+    var checkboxes = document.getElementsByTagName('input');
+    if (ele.checked) {
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].type == 'checkbox') {
+                checkboxes[i].checked = true;
+            }
+        }
+    } else {
+        for (var i = 0; i < checkboxes.length; i++) {
+            console.log(i)
+            if (checkboxes[i].type == 'checkbox') {
+                checkboxes[i].checked = false;
+            }
+        }
+    }
+}
+
+function check(){
+    var checkboxes = document.getElementsByTagName('input');
+    var btn=document.getElementById('mod');
+
+    verif=false;
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].type == 'checkbox' && checkboxes[i].checked == true) {
+                verif=true;
+                break;
+            }
+        }
+    if(!verif){
+        btn.removeAttribute("data-toggle");
+        btn.removeAttribute("data-target");
+        btn.style.cursor="not-allowed";
+        alert("You need to select at least one user");
+
+    }else{
+        btn.setAttribute("data-toggle","modal");
+        btn.setAttribute("data-target","#myModal");
+        btn.style.cursor="pointer";
+    }
+}
