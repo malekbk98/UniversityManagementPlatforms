@@ -10,10 +10,10 @@ function search_op(){
     }
     switch(option.value) {
         case "fname":
-            div.innerHTML+='<div class="form-group d-inline-block" id="search_bar"><input id="inp" type="text" class="form-control" Placeholder="Insert First Name" onkeyup="search(0,0)"></div>';
+            div.innerHTML+='<div class="form-group d-inline-block" id="search_bar"><input id="inp" type="text" class="form-control" Placeholder="Insert First Name" onkeyup="search(0,1)"></div>';
           break;
         case "lname":
-            div.innerHTML+='<div class="form-group d-inline-block" id="search_bar"><input  id="inp" type="text" class="form-control" Placeholder="Insert Last Name" onkeyup="search(0,1)"></div>';
+            div.innerHTML+='<div class="form-group d-inline-block" id="search_bar"><input  id="inp" type="text" class="form-control" Placeholder="Insert Last Name" onkeyup="search(0,2)"></div>';
           break;
         case "class":
             var cls = document.getElementById('cls');

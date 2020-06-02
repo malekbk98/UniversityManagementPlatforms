@@ -21,15 +21,21 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource ('/student_attendance', 'StudentAttendanceController');
 
 
-//Admin Routes
+/************************************ Admin Routes ****************************************/
 
+//Teacher rootes
 Route::get ('/teachers_review','TeacherController@reviews')->name('teachers_review.reviews');
-Route::resource ('/teachers','TeacherController');
+Route::get ('/teachers_lists','TeacherController@lists')->name('teachers_lists.lists');
+
+//Student rootes
 Route::get ('/students_review','StudentController@reviews')->name('students_review.reviews');
-Route::resource ('/students','StudentController');
-Route::get ('/subjects_review','SubjectController@reviews')->name('subjects_review.reviews');
 Route::get ('/students_lists','StudentController@lists')->name('students_lists.lists');
 
-Route::post ('/store_report','NotifController@store')->name('notif.report');
+//Subject rootes
+Route::get ('/subjects_review','SubjectController@reviews')->name('subjects_review.reviews');
 
+//Notif rootes
+Route::post ('/store_report','NotifController@store')->name('notif.report');
 Route::post ('/notif_grp','NotifController@notif_group')->name('notif_grp.notif_group');;
+
+/************************************ End Admin Routes **************************************/

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Teacher;
 use App\User;
+use App\Subject;
+use DB;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
@@ -89,6 +91,17 @@ class TeacherController extends Controller
     {
         $data = Teacher::with('user')->get();       
         return view('admin.teachers_reviews',compact('data'));
+    }
+    public function lists()
+    {
+        $data = DB::table('teachers')
+        ->join('users','users.id','=','teachers.user_id')
+        ->join('subjects','subjects.teacher_id','=','teachers.id')
+        ->select('teachers.position','teachers.user_id','users.first_name','users.last_name','users.email','users.phone','subjects.subject_name','subjects.subject_type')
+        ->get();
+        $sub=Subject::select('subject_name','subject_type')->get();
+        $pos=Teacher::select('position')->get();
+        return view('admin.teacher_lists',compact('data','sub','pos'));
     }
     
 }

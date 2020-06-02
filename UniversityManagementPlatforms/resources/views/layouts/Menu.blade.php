@@ -168,11 +168,17 @@
                 <p>Subjects Reviews</p>
               </a>
             </li>
-            <li class="nav-header">Students Lists</li>
+            <li class="nav-header">Notifications & Search</li>
             <li class="nav-item">
               <a href="{{route('students_lists.lists')}}" class="nav-link {{(\Request::is('students_lists')) ? 'active' : '' }}">
                 <i class="fas fa-users"></i>
                 <p>Students List</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('teachers_lists.lists')}}" class="nav-link {{(\Request::is('teachers_lists')) ? 'active' : '' }}">
+                <i class="fas fa-users"></i>
+                <p>Teachers List</p>
               </a>
             </li>
           @else

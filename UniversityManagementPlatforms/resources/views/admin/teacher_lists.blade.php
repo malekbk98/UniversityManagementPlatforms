@@ -5,7 +5,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Students List</h1>
+              <h1>Teachers List</h1>
             </div>
           </div>
         </div>
@@ -16,33 +16,31 @@
                 <option value="0">Search by</option>
                 <option value="fname">First Name</option>
                 <option value="lname">Last Name</option>
-                <option value="class">Class</option>
-                <option value="dep">Department</option>
-                <option value="spec">Speciality</option>
+                <option value="spec">Position</option>
+                <option value="class">Subject</option>
+                <option value="dep">Subject Type</option>
               </select>
             </div>
             <div class="hidden" id="cls">
-              <select class="form-control" id="cls_option" onchange="search('cls_option',5)">
-                @foreach($cls as $class){
-                  <option value="{{$class->classe_name}}">{{$class->classe_name}}</option>
-                }
-                @endforeach
-              </select>
-            </div>
-            <div class="hidden" id="spc">
-              <select class="form-control" id="spc_option" onchange="search('spc_option',6)">
-                <option>Please Select Speciality</option>
-                @foreach($cls as $spc){
-                  <option value="{{$spc->specialite}}">{{$spc->specialite}}</option>
+              <select class="form-control" id="cls_option" onchange="search('cls_option',6)">
+                @foreach($sub as $subject){
+                  <option value="{{$subject->subject_name}}">{{$subject->subject_name}}</option>
                 }
                 @endforeach
               </select>
             </div>
             <div class="hidden" id="dep">
               <select class="form-control" id="dep_option" onchange="search('dep_option',7)">
-                <option>Please Select Department</option>
-                @foreach($dep as $dept){
-                  <option value="{{$dept->department_name}}">{{$dept->department_name}}</option>
+                @foreach($sub as $subject){
+                  <option value="{{$subject->subject_type}}">{{$subject->subject_type}}</option>
+                }
+                @endforeach
+              </select>
+            </div>
+            <div class="hidden" id="spc">
+              <select class="form-control" id="spc_option" onchange="search('spc_option',5)">
+                @foreach($pos as $position){
+                  <option value="{{$position->position}}">{{$position->position}}</option>
                 }
                 @endforeach
               </select>
@@ -51,7 +49,7 @@
           <div class="col-sm-2 form-group">
               <button type="button" class="btn btn-success" id="mod" data-toggle="modal" data-target="#myModal" onmouseover="check()">Send Notification</button>
           </div>
-        </div>
+      </div>
       </section>
         <section class="content">
         <div class="container-fluid">
@@ -73,24 +71,24 @@
                         <th>Last Name</th>
                         <th>Email</th>
                         <th>Phone</th>
-                        <th>Class</th>
-                        <th>Specialty</th>
-                        <th>Department</th>
+                        <th>Position</th>
+                        <th>Subject</th>
+                        <th>Subject Type</th>
                       </tr>
                     </thead>
                     <tbody>
                       <form action="{{ route('notif_grp.notif_group') }}" method="post">
                         @csrf                  
                         @foreach($data as $details)
-                        <tr>
+                        <tr id="box{{$details->user_id}}" name="box">
                         <td><input class="form-control" type="checkbox" name="checked[{{$details->user_id}}]" value="{{$details->user_id}}"></td>
                           <td>{{$details->first_name}}</td>
                           <td>{{$details->last_name}}</td>
                           <td>{{$details->email}}</td>
                           <td>{{$details->phone}}</td>
-                          <td>{{$details->classe_name}}</td>
-                          <td>{{$details->specialite}}</td>
-                          <td>{{$details->department_name}}</td>
+                          <td>{{$details->position}}</td>
+                          <td>{{$details->subject_name}}</td>
+                          <td>{{$details->subject_type}}</td>
                         </tr>
                         @endforeach
                         <!-- Modal -->

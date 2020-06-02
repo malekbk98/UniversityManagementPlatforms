@@ -61,7 +61,7 @@ class NotifController extends Controller
         if(str_contains(redirect()->back()->content(),'student')){
             return redirect('/students_lists')->with('alert', 'Notification Sent!');
         }else{
-            return redirect('/teachers_review')->with('alert', 'Notification Sent!');
+            return redirect('/teachers_lists')->with('alert', 'Notification Sent!');
         }
     }
 
