@@ -18,7 +18,7 @@ class CreateStudentsTable extends Migration
             $table->bigInteger('classe_id')->unsigned();
             $table->foreign('classe_id')->references('id')->on('classes')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->integer('total_review');
             $table->integer('nbr_review');
             $table->timestamps();
