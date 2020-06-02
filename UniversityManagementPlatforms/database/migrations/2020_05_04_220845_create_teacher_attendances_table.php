@@ -16,9 +16,9 @@ class CreateTeacherAttendancesTable extends Migration
         Schema::create('teacher_attendances', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('lesson_id')->unsigned();
-            $table->foreign('lesson_id')->references('id')->on('lessons');
+            $table->foreign('lesson_id')->references('id')->on('lessons')->onDelete('cascade');
             $table->bigInteger('teacher_id')->unsigned();
-            $table->foreign('teacher_id')->references('id')->on('teachers');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
             $table->string('status');
             $table->dateTime('check_in');
             $table->timestamps();

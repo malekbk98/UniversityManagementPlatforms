@@ -14,7 +14,9 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
+        $departements = Department::latest()->paginate(10);
+
+        return view('admin.departments_index', compact('departements'));
     }
 
     /**
@@ -24,7 +26,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.departments_create');
     }
 
     /**
@@ -35,7 +37,13 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'department_name' => 'required'
+        ]);
+
+        $department= Department::create($data);
+        
+        return redirect()->route('departments.show', $department->id);
     }
 
     /**
@@ -46,7 +54,8 @@ class DepartmentController extends Controller
      */
     public function show(Department $department)
     {
-        //
+        return view('admin.departments_show', compact('department'));
+
     }
 
     /**
@@ -57,7 +66,7 @@ class DepartmentController extends Controller
      */
     public function edit(Department $department)
     {
-        //
+        return view('admin.departments_edit', compact('department'));
     }
 
     /**
@@ -69,7 +78,13 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, Department $department)
     {
-        //
+        $data = $request->validate([
+            'department_name' => 'required'
+        ]);
+
+        $department->update($data);
+
+        return redirect()->route('departments.show', $department->id);
     }
 
     /**
@@ -78,8 +93,11 @@ class DepartmentController extends Controller
      * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Department $department)
+    public function destroy($id)
     {
-        //
+        $department = Department::find($id);
+        $department->classes()->delete();
+        $department->delete();
+        return redirect()->route('departments.index');
     }
 }
