@@ -98,6 +98,6 @@ class DepartmentController extends Controller
         $department = Department::find($id);
         $department->classes()->delete();
         $department->delete();
-        return redirect('/');
+        return redirect()->route('departments.index');
     }
 }
