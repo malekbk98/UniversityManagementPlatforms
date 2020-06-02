@@ -168,6 +168,19 @@
                 <p>Subjects Reviews</p>
               </a>
             </li>
+            <li class="nav-header">Manage Department</li>
+            <li class="nav-item">
+              <a href="{{route('departments.index')}}" class="nav-link {{(\Request::is('departments')) ? 'active' : '' }}">
+                <i class="fas fa-university"></i>
+                <p>Department list</p>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a href="{{route('departments_create.create')}}" class="nav-link {{(\Request::is('departments_create')) ? 'active' : '' }}">
+                <i class="fas fa-university"></i>
+                <p>Create Department</p>
+              </a>
+            </li> 
             <li class="nav-header">Students Lists</li>
             <li class="nav-item">
               <a href="{{route('students_lists.lists')}}" class="nav-link {{(\Request::is('students_lists')) ? 'active' : '' }}">

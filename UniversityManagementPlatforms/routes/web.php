@@ -30,4 +30,10 @@ Route::resource ('/students','StudentController');
 Route::get ('/subjects_review','SubjectController@reviews')->name('subjects_review.reviews');
 Route::get ('/students_lists','StudentController@lists')->name('students_lists.lists');
 
+Route::get('/departments_index', 'DepartmentController@index')->name('departments_index.index');
+Route::get('/departments_show', 'DepartmentController@show')->name('departments_show.show');
+Route::get('/departments_edit', 'DepartmentController@edit')->name('departments_edit.edit');
+Route::get('/departments_create', 'DepartmentController@create')->name('departments_create.create');
+Route::resource ('/departments','DepartmentController');
+
 Route::post ('/store_report','NotifController@store')->name('notif.report');

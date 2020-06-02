@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Create Topic</h1>
+        <h1>Create Department</h1>
         <hr>
         <form action="{{ route('departments.store') }}" method="POST">
             @csrf
