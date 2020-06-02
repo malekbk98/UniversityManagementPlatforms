@@ -168,9 +168,7 @@
                 <p>Subjects Reviews</p>
               </a>
             </li>
-<<<<<<< HEAD
             <li class="nav-header">Notifications & Search</li>
-=======
             <li class="nav-header">Manage Department</li>
             <li class="nav-item">
               <a href="{{route('departments.index')}}" class="nav-link {{(\Request::is('departments')) ? 'active' : '' }}">
@@ -185,7 +183,6 @@
               </a>
             </li> 
             <li class="nav-header">Students Lists</li>
->>>>>>> 4dc938c62657255825ccf70ec132387332faabc0
             <li class="nav-item">
               <a href="{{route('students_lists.lists')}}" class="nav-link {{(\Request::is('students_lists')) ? 'active' : '' }}">
                 <i class="fas fa-users"></i>
