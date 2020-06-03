@@ -18,7 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource ('/student_attendance', 'StudentAttendanceController');
 
 
 /************************************ Admin Routes ****************************************/
@@ -58,3 +57,12 @@ Route::post ('/store_report','NotifController@store')->name('notif.report');
 Route::post ('/notif_grp','NotifController@notif_group')->name('notif_grp.notif_group');;
 
 /************************************ End Admin Routes **************************************/
+/************************************ Teacher Routes ****************************************/
+Route::resource ('/student_attendance', 'StudentAttendanceController');
+Route::resource ('/schedule', 'LessonController');
+Route::get ('/class', 'ClasseController@teacherclasselist')->name('classelist');
+Route::get ('/classe/{classid}', 'ClasseController@showstudentclasse')->name('studentclasslist');
+
+Route::resource ('/teacher_attendance', 'TeacherAttendanceController');
+Route::post('/class_attendance','StudentAttendanceController@addattendance')->name('class_attendance');
+/************************************ End Teacher Routes **************************************/

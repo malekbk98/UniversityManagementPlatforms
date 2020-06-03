@@ -208,6 +208,31 @@
                 <p>Teachers List</p>
               </a>
             </li>
+            @elseif(auth::user()->position=='teacher')
+          <li class="nav-header">Check your attendances</li>
+            <li class="nav-item">
+              <a href="{{route('teacher_attendance.index')}}" class="nav-link {{(\Request::is('teachers_attendance')) ? 'active' : '' }}">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <p>Teachers attendances</p>
+              </a>
+          </li>
+          <li class="nav-header">Check your schedule</li>
+
+            <li class="nav-item">
+              <a href="{{route('schedule.index')}}" class="nav-link {{(\Request::is('schedule')) ? 'active' : '' }}">
+                <i class="fas fa-user-graduate"></i>
+                <p>Check schedule</p>
+              </a>
+            </li>
+            <li class="nav-header"> classe attendance </li>
+
+            <li class="nav-item">
+              <a href="{{route('classelist')}}" class="nav-link {{(\Request::is('class')) ? 'active' : '' }}">
+                <i class="fas fa-flask"></i>
+                <p>Do classe attendance</p>
+              </a>
+            </li>
+            
           @else
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->

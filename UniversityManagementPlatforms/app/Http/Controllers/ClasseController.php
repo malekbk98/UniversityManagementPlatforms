@@ -1,10 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Teacher;
+use App\Subject;
+use App\Lesson;
+use App\Student;
+use App\User;
 
 use App\Classe;
 use App\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ClasseController extends Controller
 {
@@ -20,6 +27,24 @@ class ClasseController extends Controller
         return view('admin.classes_index', compact('classes'));
     }
 
+    public function teacherclasselist()
+    {
+        $classatt =auth::user()->teachers()
+        ->join ('subjects','teacher_id','=','teachers.id')
+        ->join('lessons', 'subject_id', '=', 'subjects.id')
+        ->join('classes', 'classes.id', '=', 'lessons.classe_id')->distinct('classes.classe_name')->get();
+       // dd($classatt);
+        return view ('classe.index',compact ('classatt'));
+    } 
+
+    public function showstudentclasse(Classe $classe,$classid)
+    {
+        $classroom =Student::where('classe_id','=',$classid)->join('users','users.id','=','students.user_id')->select('users.first_name','users.last_name','users.birthday','students.id')->get();
+      //  $classroom =User::students()->where('students.classe_id','=',$classid) ->get();
+       // dd($classroom);
+      return view ('classe.classroom',compact ('classroom'));
+    
+    }
     /**
      * Show the form for creating a new resource.
      *

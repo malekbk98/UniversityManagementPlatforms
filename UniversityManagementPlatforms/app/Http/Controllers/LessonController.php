@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Teacher;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use App\Lesson;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,12 @@ class LessonController extends Controller
      */
     public function index()
     {
-        //
+        
+        $teacher_schedule =auth::user()->teachers()
+        ->join ('subjects','teacher_id','=','teachers.id')
+        ->join('lessons', 'lessons.subject_id', '=', 'subjects.id')->get();
+   //dd($teacher_schedule);
+        return view ('classe.schedule',compact ('teacher_schedule'));
     }
 
     /**
