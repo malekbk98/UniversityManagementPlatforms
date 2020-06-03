@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classe;
+use App\Department;
 use Illuminate\Http\Request;
 
 class ClasseController extends Controller
@@ -14,7 +15,9 @@ class ClasseController extends Controller
      */
     public function index()
     {
-        //
+        $classes = Classe::with('department')->latest()->paginate(10);
+
+        return view('admin.classes_index', compact('classes'));
     }
 
     /**
@@ -24,7 +27,8 @@ class ClasseController extends Controller
      */
     public function create()
     {
-        //
+        $departements = Department::all();
+        return view('admin.classes_create',compact('departements'));
     }
 
     /**
@@ -35,7 +39,14 @@ class ClasseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data =request()->validate([
+            'classe_name' => 'required',
+            'department_id' => 'required',
+            'specialite' => 'required',
+        ]);
+        
+        Classe::create($data);
+        return redirect(route('classes.index'));
     }
 
     /**
@@ -44,9 +55,10 @@ class ClasseController extends Controller
      * @param  \App\Classe  $classe
      * @return \Illuminate\Http\Response
      */
-    public function show(Classe $classe)
+    public function show($classe)
     {
-        //
+        $classe = Classe::where('id', $classe)->firstOrFail();
+        return view('admin.classes_show', compact('classe'));
     }
 
     /**
@@ -55,9 +67,11 @@ class ClasseController extends Controller
      * @param  \App\Classe  $classe
      * @return \Illuminate\Http\Response
      */
-    public function edit(Classe $classe)
+    public function edit($class)
     {
-        //
+        $class = Classe::where('id', $class)->firstOrFail();
+        $department = Department::all();
+        return view('admin.classes_edit', compact('class','department'));
     }
 
     /**
@@ -69,7 +83,14 @@ class ClasseController extends Controller
      */
     public function update(Request $request, Classe $classe)
     {
-        //
+        $classe = Classe::where('id', $classe)->firstOrFail();
+        $data =request()->validate([
+            'classe_name' => 'required',
+            'department_id' => 'required',
+            'specialite' => 'required',
+        ]);
+        $classe->update($data);
+        return redirect('classes/'. $classe->id);
     }
 
     /**
@@ -78,8 +99,11 @@ class ClasseController extends Controller
      * @param  \App\Classe  $classe
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Classe $classe)
+    public function destroy($id)
     {
-        //
+        $classe = Classe::find($id);
+        $classe->delete();
+
+        return redirect('/classes');
     }
 }
