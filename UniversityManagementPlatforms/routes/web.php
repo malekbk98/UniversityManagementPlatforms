@@ -40,12 +40,18 @@ Route::resource ('/subjects','SubjectController');
 
 
 //Dep rootes
-
 Route::get('/departments_index', 'DepartmentController@index')->name('departments_index.index');
 Route::get('/departments_show', 'DepartmentController@show')->name('departments_show.show');
 Route::get('/departments_edit', 'DepartmentController@edit')->name('departments_edit.edit');
 Route::get('/departments_create', 'DepartmentController@create')->name('departments_create.create');
 Route::resource ('/departments','DepartmentController');
+
+//Classe rootes
+Route::get('/classes_index', 'ClasseController@index')->name('classes_index.index');
+Route::get('/classes_show', 'ClasseController@show')->name('classes_show.show');
+Route::get('/classes_edit', 'ClasseController@edit')->name('classes_edit.edit');
+Route::get('/classes_create', 'ClasseController@create')->name('classes_create.create');
+Route::resource ('/classes','ClasseController');
 
 //Notif rootes
 Route::post ('/store_report','NotifController@store')->name('notif.report');

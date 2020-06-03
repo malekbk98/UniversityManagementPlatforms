@@ -6,18 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Classe extends Model
 {
-    public function students()
+    protected $guarded = [];
+    
+    public function student()
     {
         return $this->hasMany('App\Student');
     }
 
-    public function lessons()
+    public function lesson()
     {
         return $this->hasMany('App\Lesson');
     }
     
-    public function departements()
+    public function department()
     {
-        return $this->belongsTo('App\Departement');
+        return $this->belongsTo('App\Department');
     }
 }

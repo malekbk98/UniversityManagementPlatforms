@@ -81,7 +81,7 @@ class ClasseController extends Controller
      * @param  \App\Classe  $classe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Classe $classe)
+    public function update($classe,Request $request)
     {
         $classe = Classe::where('id', $classe)->firstOrFail();
         $data =request()->validate([
@@ -90,7 +90,7 @@ class ClasseController extends Controller
             'specialite' => 'required',
         ]);
         $classe->update($data);
-        return redirect('classes/'. $classe->id);
+        return redirect()->route('classes.show', $classe->id);
     }
 
     /**
@@ -104,6 +104,6 @@ class ClasseController extends Controller
         $classe = Classe::find($id);
         $classe->delete();
 
-        return redirect('/classes');
+        return redirect()->route('classes.index');
     }
 }
