@@ -14,7 +14,9 @@ class NotifController extends Controller
      */
     public function index()
     {
-        //
+        $notifs = Notif::latest()->paginate(10);
+
+        return view('posts.index', compact('notifs'));
     }
 
     /**
@@ -24,7 +26,8 @@ class NotifController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
+
     }
 
     /**
@@ -65,6 +68,20 @@ class NotifController extends Controller
         }
     }
 
+    public function post(Request $request)
+    {
+        $data = $request->validate([
+            'title' => 'required',
+            'message' => 'required',
+            'status' => 'required'
+        ]);
+
+        Notif::create($data);
+
+        return redirect(route('posts.index'));
+    }
+
+
     /**
      * Display the specified resource.
      *
@@ -73,7 +90,8 @@ class NotifController extends Controller
      */
     public function show(Notif $notif)
     {
-        //
+        return view('posts.show', compact('notif'));
+
     }
 
     /**
@@ -84,7 +102,7 @@ class NotifController extends Controller
      */
     public function edit(Notif $notif)
     {
-        //
+        return view('topics.edit', compact('topic'));
     }
 
     /**
@@ -96,7 +114,14 @@ class NotifController extends Controller
      */
     public function update(Request $request, Notif $notif)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required',
+            'content' => 'required'
+        ]);
+
+        $notif->update($data);
+
+        return redirect()->route('posts.show', $notif->id);
     }
 
     /**
@@ -107,7 +132,9 @@ class NotifController extends Controller
      */
     public function destroy(Notif $notif)
     {
-        //
+        Topic::destroy($notif->id);
+
+        return redirect('/');
     }
     private function validationRules()
     {
