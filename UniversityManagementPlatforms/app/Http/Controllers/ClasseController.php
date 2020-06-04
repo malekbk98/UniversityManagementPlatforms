@@ -21,7 +21,7 @@ class ClasseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         $classes = Classe::with('department')->latest()->paginate(10);
 
         return view('admin.classes_index', compact('classes'));

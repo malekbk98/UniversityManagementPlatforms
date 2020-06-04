@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Classe;
 use App\Teacher;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Lesson;
+use App\Subject;
 use Illuminate\Http\Request;
 
 class LessonController extends Controller
@@ -23,6 +25,12 @@ class LessonController extends Controller
    //dd($teacher_schedule);
         return view ('classe.schedule',compact ('teacher_schedule'));
     }
+    public function home()
+    {
+        $lesson = Lesson::with('classe','subject')->latest()->paginate(10);
+
+        return view('admin.schedule_index', compact('lesson'));  
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -31,7 +39,9 @@ class LessonController extends Controller
      */
     public function create()
     {
-        //
+        $class = Classe::all();
+        $subject = Subject::all();
+        return view('admin.schedules_create',compact('class','subject'));
     }
 
     /**
@@ -42,7 +52,17 @@ class LessonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data =request()->validate([
+            'subject_id' => 'required',
+            'classe_id' => 'required',
+            'classroom' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'week_day' => 'required'
+        ]);
+        
+        Lesson::create($data);
+        return redirect(route('schedule.create'));
     }
 
     /**
@@ -64,7 +84,10 @@ class LessonController extends Controller
      */
     public function edit(Lesson $lesson)
     {
-        //
+        $lesson = Lesson::where('id', $lesson)->firstOrFail();
+        $class = Classe::all();
+        $subject = Subject::all();
+        return view('admin.schedules_edit', compact('lesson','subject','class'));
     }
 
     /**
@@ -76,7 +99,17 @@ class LessonController extends Controller
      */
     public function update(Request $request, Lesson $lesson)
     {
-        //
+        $lesson = Lesson::where('id', $lesson)->firstOrFail();
+        $data =request()->validate([
+            'subject_id' => 'required',
+            'classe_id' => 'required',
+            'classroom' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'week_day' => 'required'
+        ]);
+        $lesson->update($data);
+        return redirect('schedules/'. $lesson->id);
     }
 
     /**
@@ -85,8 +118,11 @@ class LessonController extends Controller
      * @param  \App\Lesson  $lesson
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Lesson $lesson)
+    public function destroy($id)
     {
-        //
+        $lesson = Lesson::find($id);
+        $lesson->delete();
+
+        return redirect('/schedules');
     }
 }
