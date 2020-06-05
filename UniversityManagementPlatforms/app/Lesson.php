@@ -6,17 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lesson extends Model
 {
-   public function teacher_attendances()
+    protected $guarded = [];
+
+   public function teacher_attendance()
    {
        return $this->hasMany('App\TeacherAttendance');
    }
 
-   public function subjects()
+   public function subject()
    {
        return $this->belongsTo('App\Subject');
    }
 
-   public function classes()
+   public function classe()
    {
        return $this->belongsTo('App\Classe');
    }

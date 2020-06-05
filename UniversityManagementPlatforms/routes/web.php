@@ -60,6 +60,12 @@ Route::get('/posts_create', 'NotifController@create')->name('posts_create.create
 Route::post('/posts_create','NotifController@post')->name('posts.post');
 Route::resource ('/posts','NotifController');
 
+//Schedule routes
+Route::get('/schedule_index', 'LessonController@home')->name('schedule_index.home');
+Route::get('/schedule_edit', 'LessonController@edit')->name('schedule_edit.edit');
+Route::get('/schedule_create', 'LessonController@create')->name('schedule_create.create');
+Route::resource ('/schedules', 'LessonController');
+
 //Notif routes
 Route::post ('/store_report','NotifController@store')->name('notif.report');
 Route::post ('/notif_grp','NotifController@notif_group')->name('notif_grp.notif_group');;

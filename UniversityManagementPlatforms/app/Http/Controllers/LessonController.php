@@ -41,7 +41,7 @@ class LessonController extends Controller
     {
         $class = Classe::all();
         $subject = Subject::all();
-        return view('admin.schedules_create',compact('class','subject'));
+        return view('admin.schedule_create',compact('class','subject'));
     }
 
     /**
@@ -62,7 +62,7 @@ class LessonController extends Controller
         ]);
         
         Lesson::create($data);
-        return redirect(route('schedule.create'));
+        return redirect('/schedule_index');
     }
 
     /**
@@ -82,12 +82,12 @@ class LessonController extends Controller
      * @param  \App\Lesson  $lesson
      * @return \Illuminate\Http\Response
      */
-    public function edit(Lesson $lesson)
+    public function edit($lesson)
     {
         $lesson = Lesson::where('id', $lesson)->firstOrFail();
         $class = Classe::all();
         $subject = Subject::all();
-        return view('admin.schedules_edit', compact('lesson','subject','class'));
+        return view('admin.schedule_edit', compact('lesson','subject','class'));
     }
 
     /**
@@ -97,7 +97,7 @@ class LessonController extends Controller
      * @param  \App\Lesson  $lesson
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Lesson $lesson)
+    public function update(Request $request, $lesson)
     {
         $lesson = Lesson::where('id', $lesson)->firstOrFail();
         $data =request()->validate([
@@ -109,7 +109,7 @@ class LessonController extends Controller
             'week_day' => 'required'
         ]);
         $lesson->update($data);
-        return redirect('schedules/'. $lesson->id);
+        return redirect('/schedule_index');
     }
 
     /**
@@ -123,6 +123,6 @@ class LessonController extends Controller
         $lesson = Lesson::find($id);
         $lesson->delete();
 
-        return redirect('/schedules');
+        return redirect('/schedule_index');
     }
 }
