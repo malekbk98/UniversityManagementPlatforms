@@ -232,6 +232,20 @@
                 <p>Do classe attendance</p>
               </a>
             </li>
+
+            <li class="nav-header">Manage Post</li>
+            <li class="nav-item">
+              <a href="{{route('posts.index')}}" class="nav-link {{(\Request::is('posts')) ? 'active' : '' }}">
+                <i class="far fa-clipboard"></i>
+                <p>ALL Post</p>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a href="{{route('posts_create.create')}}" class="nav-link {{(\Request::is('posts_create')) ? 'active' : '' }}">
+                <i class="far fa-clipboard"></i>
+                <p>Create Post</p>
+              </a>
+            </li>
             
           @else
           <!-- Add icons to the links using the .nav-icon class

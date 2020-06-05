@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Notif;
 use Illuminate\Http\Request;
 
@@ -16,7 +18,7 @@ class NotifController extends Controller
     {
         $notifs = Notif::latest()->paginate(10);
 
-        return view('posts.index', compact('notifs'));
+        return view('posts.posts_index', compact('notifs'));
     }
 
     /**
@@ -26,7 +28,7 @@ class NotifController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('posts.posts_create');
 
     }
 
@@ -76,7 +78,7 @@ class NotifController extends Controller
             'status' => 'required'
         ]);
 
-        Notif::create($data);
+        $notif =Auth::user()->notifs()->create($data);
 
         return redirect(route('posts.index'));
     }
@@ -88,9 +90,10 @@ class NotifController extends Controller
      * @param  \App\Notif  $notif
      * @return \Illuminate\Http\Response
      */
-    public function show(Notif $notif)
+    public function show($notif)
     {
-        return view('posts.show', compact('notif'));
+        $notif = Notif::where('id', $notif)->firstOrFail();
+        return view('posts.posts_show', compact('notif'));
 
     }
 
@@ -100,9 +103,10 @@ class NotifController extends Controller
      * @param  \App\Notif  $notif
      * @return \Illuminate\Http\Response
      */
-    public function edit(Notif $notif)
+    public function edit($notif)
     {
-        return view('topics.edit', compact('topic'));
+        $notif = Notif::where('id', $notif)->firstOrFail();
+        return view('posts.posts_edit', compact('notif'));
     }
 
     /**
@@ -116,12 +120,13 @@ class NotifController extends Controller
     {
         $data = $request->validate([
             'title' => 'required',
-            'content' => 'required'
+            'message' => 'required',
+            'status' => 'required'
         ]);
 
         $notif->update($data);
 
-        return redirect()->route('posts.show', $notif->id);
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -130,11 +135,12 @@ class NotifController extends Controller
      * @param  \App\Notif  $notif
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Notif $notif)
+    public function destroy($id)
     {
-        Topic::destroy($notif->id);
+        $notif = Notif::find($id);
+        $notif->delete();
 
-        return redirect('/');
+        return redirect('/posts');
     }
     private function validationRules()
     {

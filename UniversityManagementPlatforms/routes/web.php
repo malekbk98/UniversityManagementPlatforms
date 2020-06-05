@@ -53,10 +53,11 @@ Route::get('/classes_create', 'ClasseController@create')->name('classes_create.c
 Route::resource ('/classes','ClasseController');
 
 //Posts routes
-Route::get('/index', 'NotifController@index')->name('index.index');
-Route::get('/show', 'NotifController@show')->name('show.show');
-Route::get('/edit', 'NotifController@edit')->name('edit.edit');
-Route::get('/create', 'NotifController@create')->name('create.create');
+Route::get('/posts_index', 'NotifController@index')->name('posts_index.index');
+Route::get('/posts_show', 'NotifController@show')->name('posts_show.show');
+Route::get('/posts_edit', 'NotifController@edit')->name('posts_edit.edit');
+Route::get('/posts_create', 'NotifController@create')->name('posts_create.create');
+Route::post('/posts_create','NotifController@post')->name('posts.post');
 Route::resource ('/posts','NotifController');
 
 //Notif routes
