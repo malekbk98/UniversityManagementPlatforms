@@ -80,3 +80,13 @@ Route::get ('/classe/{classid}', 'ClasseController@showstudentclasse')->name('st
 Route::resource ('/teacher_attendance', 'TeacherAttendanceController');
 Route::post('/class_attendance','StudentAttendanceController@addattendance')->name('class_attendance');
 /************************************ End Teacher Routes **************************************/
+
+// add subject review******
+Route::resource('/reviewSubjectt','SubjectController');
+Route::post('/review_Subject','SubjectController@add_subject_review')->name('review_Subject.add_subject_review');
+//*********
+
+// add Teacher review******
+Route::resource('/reviewTeacher','TeacherController');
+Route::post('/review_Teacher','TeacherController@add_Teacher_review')->name('review_Teacher.add_Teacher_review');
+//*********
