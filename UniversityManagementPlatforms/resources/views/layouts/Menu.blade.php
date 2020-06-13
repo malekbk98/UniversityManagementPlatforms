@@ -149,6 +149,19 @@
             </a>
           </li>
           @if (auth::user()->position=='admin')
+          <li class="nav-header">Notifications & Search</li>
+            <li class="nav-item">
+              <a href="{{route('students_lists.lists')}}" class="nav-link {{(\Request::is('students_lists')) ? 'active' : '' }}">
+                <i class="fas fa-users"></i>
+                <p>Students List</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('teachers_lists.lists')}}" class="nav-link {{(\Request::is('teachers_lists')) ? 'active' : '' }}">
+                <i class="fas fa-users"></i>
+                <p>Teachers List</p>
+              </a>
+            </li>
           <li class="nav-header">Check Reviews</li>
             <li class="nav-item">
               <a href="{{route('teachers_review.reviews')}}" class="nav-link {{(\Request::is('teachers_review')) ? 'active' : '' }}">
@@ -168,9 +181,6 @@
                 <p>Subjects Reviews</p>
               </a>
             </li>
-<<<<<<< HEAD
-            <li class="nav-header">Notifications & Search</li>
-=======
             <li class="nav-header">Manage Department</li>
             <li class="nav-item">
               <a href="{{route('departments.index')}}" class="nav-link {{(\Request::is('departments')) ? 'active' : '' }}">
@@ -184,20 +194,6 @@
                 <p>Create Department</p>
               </a>
             </li> 
-            <li class="nav-header">Students Lists</li>
->>>>>>> 4dc938c62657255825ccf70ec132387332faabc0
-            <li class="nav-item">
-              <a href="{{route('students_lists.lists')}}" class="nav-link {{(\Request::is('students_lists')) ? 'active' : '' }}">
-                <i class="fas fa-users"></i>
-                <p>Students List</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{route('teachers_lists.lists')}}" class="nav-link {{(\Request::is('teachers_lists')) ? 'active' : '' }}">
-                <i class="fas fa-users"></i>
-                <p>Teachers List</p>
-              </a>
-            </li>
           @else
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->

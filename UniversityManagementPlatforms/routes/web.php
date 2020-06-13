@@ -17,34 +17,37 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::resource ('/student_attendance', 'StudentAttendanceController');
+Route::middleware('auth')->group(function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::resource ('/student_attendance', 'StudentAttendanceController');
 
 
-/************************************ Admin Routes ****************************************/
+    /************************************ Admin Routes ****************************************/
+    //Teacher rootes
+    Route::get ('/teachers_review','TeacherController@reviews')->name('teachers_review.reviews');
+    Route::get ('/teachers_lists','TeacherController@lists')->name('teachers_lists.lists');
+    Route::resource ('/teachers','TeacherController');
 
-//Teacher rootes
-Route::get ('/teachers_review','TeacherController@reviews')->name('teachers_review.reviews');
-Route::get ('/teachers_lists','TeacherController@lists')->name('teachers_lists.lists');
 
-//Student rootes
-Route::get ('/students_review','StudentController@reviews')->name('students_review.reviews');
-Route::get ('/students_lists','StudentController@lists')->name('students_lists.lists');
+    //Student rootes
+    Route::get ('/students_review','StudentController@reviews')->name('students_review.reviews');
+    Route::get ('/students_lists','StudentController@lists')->name('students_lists.lists');
+    Route::resource ('/students','StudentController');
 
-<<<<<<< HEAD
-//Subject rootes
-Route::get ('/subjects_review','SubjectController@reviews')->name('subjects_review.reviews');
+    //Subject rootes
+    Route::get ('/subjects_review','SubjectController@reviews')->name('subjects_review.reviews');
+    Route::resource ('/subjects','SubjectController');
 
-//Notif rootes
-=======
-Route::get('/departments_index', 'DepartmentController@index')->name('departments_index.index');
-Route::get('/departments_show', 'DepartmentController@show')->name('departments_show.show');
-Route::get('/departments_edit', 'DepartmentController@edit')->name('departments_edit.edit');
-Route::get('/departments_create', 'DepartmentController@create')->name('departments_create.create');
-Route::resource ('/departments','DepartmentController');
 
->>>>>>> 4dc938c62657255825ccf70ec132387332faabc0
-Route::post ('/store_report','NotifController@store')->name('notif.report');
-Route::post ('/notif_grp','NotifController@notif_group')->name('notif_grp.notif_group');;
+    //Dep rootes
+    Route::get('/departments_index', 'DepartmentController@index')->name('departments_index.index');
+    Route::get('/departments_show', 'DepartmentController@show')->name('departments_show.show');
+    Route::get('/departments_edit', 'DepartmentController@edit')->name('departments_edit.edit');
+    Route::get('/departments_create', 'DepartmentController@create')->name('departments_create.create');
+    Route::resource ('/departments','DepartmentController');
 
-/************************************ End Admin Routes **************************************/
+    //Notif rootes
+    Route::post ('/store_report','NotifController@store')->name('notif.report');
+    Route::post ('/notif_grp','NotifController@notif_group')->name('notif_grp.notif_group');
+    /************************************ End Admin Routes **************************************/
+});
