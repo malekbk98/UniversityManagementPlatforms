@@ -13,7 +13,7 @@
                       <th>subject</th>
                       <th>check in</th>
                       <th style="width: 40px">status</th>
-                      @foreach($studentatt as $student_attendance)
+                      @foreach($teacheratt as $teacher_attendance)
 
                     </tr>
                   </thead>
@@ -21,20 +21,20 @@
                     <tr>
                       <td>
                       
-{{$student_attendance->subject_name}}
+{{$teacher_attendance->subject_name}}
 
                          </td>
                       <td>
         
-{{$student_attendance->check_in}}
+{{$teacher_attendance->check_in}}
 
                       </td>
                       <td>
-                      @if($student_attendance->status == "present"||$student_attendance->status == "Present")
+                      @if($teacher_attendance->status == "Present"|| $teacher_attendance->status == "present")
                       
-                      <span class="badge bg-success">{{$student_attendance->status}}</span>
+                      <span class="badge bg-success">{{$teacher_attendance->status}}</span>
                       @else
-                      <span class="badge bg-danger">{{$student_attendance->status}}</span>
+                      <span class="badge bg-danger">{{$teacher_attendance->status}}</span>
 
                       @endif
                       
@@ -48,7 +48,7 @@
 </div>
 <div class="col-md-4">
 <div class="content">
-<a type="button" class="btn btn-primary float-right" role="button" href="{{route('student_attendance.create')}}" >
+<a type="button" class="btn btn-primary float-right" role="button" href="{{route('teacher_attendance.create')}}" >
   Add attendance
 </a>
 </div>

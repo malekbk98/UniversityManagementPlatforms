@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Subject;
+use App\Student;
+use App\Lesson;
+use App\Classe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SubjectController extends Controller
 {
@@ -14,7 +18,24 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        //
+        $subject_review =auth::user()->students()
+        ->join ('classes','classes.id','=','classe_id')
+        ->join('lessons', 'lessons.classe_id', '=', 'classes.id')
+        ->join('subjects', 'subjects.id', '=', 'lessons.subject_id')->get();
+
+        return view('review.review',compact('subject_review'));
+
+    }
+
+    public function add_subject_review(Request $request, Subject $subject)
+    {
+        $x = Subject::find($request['id']);
+        $x->total_review = $x->total_review + $request->total_review1;
+        $x->nbr_review++;
+        $x->save();
+
+        return redirect('reviewSubjectt');
+    
     }
 
     /**

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Student;
 use App\User;
 use App\StudentAttendance;
+use App\Classe;
+use App\Lesson;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,22 +41,34 @@ class StudentAttendanceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $user_id= Auth::id();
-        $student_id= Student::where('user_id', '=', $stid)->pluck('id');
-      //  $request->validate([
-           // 'check_in' => 'required',
-         //   'status'=> 'required'
-     //   ]);
+    {$user_id= Auth::id();
+        $student_id= Student::where('user_id', '=', $user_id)->pluck('id');
         $student_attendance = new StudentAttendance;
-        $student_attendance ->student_id = $student_id[1];
-        $student_attendance ->lesson_id = 17;
-        $student_attendance ->check_in = now() ;
-        $student_attendance =$request->status;
+        $student_attendance ->student_id =$request->student_id = $student_id[1];
+        $student_attendance ->lesson_id=$request->lesson_id ;
+        $student_attendance ->check_in =$request->check_in = now() ;
+        $student_attendance ->status=$request->status;
         $student_attendance -> save();
-        return redirect()->route('student_attendance.index');
-    }
-
+        return redirect()->route('student_attendance.index'); }
+       
+       
+       
+        public function addattendance(Request $request )
+        {        
+            //$lesson = Lesson::find($request->lesson_id);
+           
+            foreach ($request ['status'] as $id =>$status) {
+            
+            $student_attendance = new StudentAttendance;
+          $student_attendance ->student_id =$id ;
+           $student_attendance ->lesson_id=$request->lesson_id ;
+           $student_attendance ->check_in =$request->check_in = now() ;
+           $student_attendance ->status=$status;
+          $student_attendance -> save();
+        } 
+        return redirect()->route('classelist');
+    
+        }
     /**
      * Display the specified resource.
      *

@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Teacher;
 use App\User;
 use App\Subject;
+use App\Student;
+use App\Lesson;
+use App\Classe;
+use Illuminate\Support\Facades\Auth;
 use DB;
 use Illuminate\Http\Request;
 
@@ -17,8 +21,26 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //
+            $teacher_review =auth::user()->students()
+            ->join ('classes','classes.id','=','classe_id')
+            ->join('lessons', 'lessons.classe_id', '=', 'classes.id')
+            ->join('subjects', 'subjects.id', '=', 'lessons.subject_id')
+            ->join('teachers', 'teachers.id','=', 'subjects.teacher_id')->with('user')->get();
+    
+            return view('review.review_teacher',compact('teacher_review'));
     }
+
+    public function add_teacher_review(Request $request, Teacher $Teacher)
+    {
+        $x = Teacher::find($request['id']);
+        $x->total_review = $x->total_review + $request->total_review1;
+        $x->nbr_review++;
+        $x->save();
+
+        return redirect('reviewTeacher');
+        
+    }
+
 
     /**
      * Show the form for creating a new resource.

@@ -193,35 +193,97 @@
                 <i class="fas fa-university"></i>
                 <p>Create Department</p>
               </a>
+            </li>
+            <li class="nav-header">Manage Class</li>
+            <li class="nav-item">
+              <a href="{{route('classes.index')}}" class="nav-link {{(\Request::is('classes')) ? 'active' : '' }}">
+                <i class="fas fa-chalkboard"></i>
+                <p>Class list</p>
+              </a>
             </li> 
+<<<<<<< HEAD
           @else
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+=======
+            <li class="nav-item">
+              <a href="{{route('classes_create.create')}}" class="nav-link {{(\Request::is('classes_create')) ? 'active' : '' }}">
+                <i class="fas fa-chalkboard"></i>
+                <p>Create Class</p>
+              </a>
+            </li>
+            <li class="nav-header">Notifications & Search</li> 
+            <li class="nav-header">Students Lists</li>
+            <li class="nav-item">
+              <a href="{{route('students_lists.lists')}}" class="nav-link {{(\Request::is('students_lists')) ? 'active' : '' }}">
+                <i class="fas fa-users"></i>
+                <p>Students List</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('teachers_lists.lists')}}" class="nav-link {{(\Request::is('teachers_lists')) ? 'active' : '' }}">
+                <i class="fas fa-users"></i>
+                <p>Teachers List</p>
+              </a>
+            </li>
+            @elseif(auth::user()->position=='teacher')
+          <li class="nav-header">Check your attendances</li>
+            <li class="nav-item">
+              <a href="{{route('teacher_attendance.index')}}" class="nav-link {{(\Request::is('teachers_attendance')) ? 'active' : '' }}">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <p>Teachers attendances</p>
+              </a>
+          </li>
+          <li class="nav-header">Check your schedule</li>
+
+            <li class="nav-item">
+              <a href="{{route('schedule.index')}}" class="nav-link {{(\Request::is('schedule')) ? 'active' : '' }}">
+                <i class="fas fa-user-graduate"></i>
+                <p>Check schedule</p>
+              </a>
+            </li>
+            <li class="nav-header"> classe attendance </li>
+
+            <li class="nav-item">
+              <a href="{{route('classelist')}}" class="nav-link {{(\Request::is('class')) ? 'active' : '' }}">
+                <i class="fas fa-flask"></i>
+                <p>Do classe attendance</p>
+              </a>
+            </li>
+
+            <li class="nav-header">Manage Post</li>
+            <li class="nav-item">
+              <a href="{{route('posts.index')}}" class="nav-link {{(\Request::is('posts')) ? 'active' : '' }}">
+                <i class="far fa-clipboard"></i>
+                <p>ALL Post</p>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a href="{{route('posts_create.create')}}" class="nav-link {{(\Request::is('posts_create')) ? 'active' : '' }}">
+                <i class="far fa-clipboard"></i>
+                <p>Create Post</p>
+              </a>
+            </li>
+          <!-- Student Nav Bar-->
+         @elseif(auth::user()->position=='student')
+         
+          <li class="nav-header">Reviews</li>
+            <li class="nav-item">
+              <a href="{{route('reviewTeacher.index')}}" class="nav-link {{(\Request::is('reviewTeacher')) ? 'active' : '' }}">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <p>Teachers Review</p>
+              </a>
+          </li>
+>>>>>>> ea786da938f6c87da5fa06c10e58ac638b4b0190
           <li class="nav-item">
-            <a href="{{asset('pages/widgets.html')}}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="{{Route('reviewSubjectt.index')}}" class="nav-link" {{(\Request::is('reviewSubjectt')) ? 'active' : '' }}>
+              <i class="nav-icon fas fa-book"></i>
               <p>
-                Widgets
-                <span class="right badge badge-danger">New</span>
+                Subject Review
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Layout Options
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">6</span>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{asset('pages/layout/top-nav.html')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation</p>
-                </a>
-              </li>
+              @else
               <li class="nav-item">
                 <a href="{{asset('pages/layout/top-nav-sidebar.html')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
