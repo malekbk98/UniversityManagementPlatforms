@@ -24,16 +24,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
     /************************************ Admin Routes ****************************************/
-    //Teacher rootes
-    Route::get ('/teachers_review','TeacherController@reviews')->name('teachers_review.reviews');
-    Route::get ('/teachers_lists','TeacherController@lists')->name('teachers_lists.lists');
-    Route::resource ('/teachers','TeacherController');
     //Teacher routes
     Route::get ('/teachers_review','TeacherController@reviews')->name('teachers_review.reviews');
     Route::get ('/teachers_lists','TeacherController@lists')->name('teachers_lists.lists');
+    Route::get('/teachers_index', 'TeacherController@home')->name('teachers_index.home');
+    Route::get('/teachers_edit', 'TeacherController@edit')->name('teachers_edit.edit');
+    Route::get('/teachers_create', 'TeacherController@create')->name('teachers_create.create');
     Route::resource ('/teachers','TeacherController');
 
     //Student rootes
+    Route::get ('/students_manages','StudentController@index')->name('students_manages.index');
+    Route::delete ('/students/{id}','StudentController@delete')->name('students.delete');
+    Route::get ('/students_create','StudentController@create')->name('students_create.create');
     Route::get ('/students_review','StudentController@reviews')->name('students_review.reviews');
     Route::get ('/students_lists','StudentController@lists')->name('students_lists.lists');
     Route::resource ('/students','StudentController');

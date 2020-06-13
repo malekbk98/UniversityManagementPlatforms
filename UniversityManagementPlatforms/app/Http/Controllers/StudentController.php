@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Student;
 use App\Classe;
+use App\User;
 use App\Department;
 use DB;
 use Illuminate\Http\Request;
@@ -17,7 +18,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::with('user')->latest()->paginate(10);
+
+        return view('admin.students_manages', compact('students'));
     }
 
     /**
@@ -27,7 +30,10 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+        $classes = Classe::all();
+       
+        return view('admin.students_create',compact('users','classes'));
     }
 
     /**
@@ -38,7 +44,15 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data =request()->validate([
+            'user_id' => 'required',
+            'classe_id' => 'required',
+            'total_review' => 'required',
+            'nbr_review' => 'required'
+        ]);
+        
+        Student::create($data);
+        return redirect(route('students.index'));    
     }
 
     /**
@@ -59,9 +73,13 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Student $student)
+    public function edit($student)
     {
-        //
+        $student = Student::where('id', $student)->firstOrFail();
+        $users = User::all();
+        $classes = Classe::all();
+
+        return view('admin.students_edit', compact('student','users','classes'));
     }
 
     /**
@@ -71,9 +89,17 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, $student)
     {
-        //
+        $student = Student::where('id', $student)->firstOrFail();
+        $data =request()->validate([
+            'user_id' => 'required',
+            'classe_id' => 'required',
+            'total_review' => 'required',
+            'nbr_review' => 'required'
+        ]);
+        $student->update($data);
+        return redirect('students/'. $student->id);
     }
 
     /**
@@ -84,7 +110,16 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        //Student::destroy($student->id);
+        Student::with('studentAttendance','user')->delete();
+        return redirect('/students');
+    }
+    public function delete($id)
+    {
+        $student = Student::find($id);
+        $student->delete();
+
+        return redirect()->route('students.index');
     }
     public function reviews()
     {

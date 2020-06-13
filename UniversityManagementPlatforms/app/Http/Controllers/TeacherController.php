@@ -29,6 +29,12 @@ class TeacherController extends Controller
     
             return view('review.review_teacher',compact('teacher_review'));
     }
+    public function home()
+    {
+        $teachers = Teacher::with('user')->latest()->paginate(10);
+
+        return view('admin.teachers_index', compact('teachers'));
+    }
 
     public function add_teacher_review(Request $request, Teacher $Teacher)
     {
@@ -49,7 +55,8 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        //
+        $users = Teacher::with('user')->get();
+        return view('admin.teachers_create',compact('users'));
     }
 
     /**
@@ -60,7 +67,17 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data =request()->validate([
+            'user_id' => 'required',
+            'salary' => 'required',
+            'start_date' => 'required',
+            'position' => 'required',
+            'total_review' => 'required',
+            'nbr_review' => 'required'
+        ]);
+        
+        Teacher::create($data);
+        return redirect(route('teachers_index.home'));
     }
 
     /**
@@ -71,6 +88,8 @@ class TeacherController extends Controller
      */
     public function show(Teacher $teacher)
     {
+        return view('admin.teachers_show', compact('teacher'));
+
         $data=$teacher;
         return view('admin.report',compact('data'));
 
@@ -82,8 +101,12 @@ class TeacherController extends Controller
      * @param  \App\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function edit(Teacher $teacher)
+    public function edit($teacher)
     {
+        $teacher = Teacher::where('id', $teacher)->firstOrFail();
+        $users = Teacher::with('user')->get();
+
+        return view('admin.teachers_edit', compact('teacher','users'));
 
     }
 
@@ -94,9 +117,18 @@ class TeacherController extends Controller
      * @param  \App\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Teacher $teacher)
+    public function update(Request $request,$teacher)
     {
-        //
+        $teacher = Teacher::where('id', $teacher)->firstOrFail();
+        $data =request()->validate([
+            'salary' => 'required',
+            'start_date' => 'required',
+            'position' => 'required',
+            'total_review' => 'required',
+            'nbr_review' => 'required'
+        ]);
+        $teacher->update($data);
+        return redirect('teachers/'. $teacher->id);
     }
 
     /**
@@ -107,7 +139,9 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
-        //
+        Teacher::destroy($teacher->id);
+
+        return redirect()->route('teachers_index.home');
     }
     public function reviews()
     {
