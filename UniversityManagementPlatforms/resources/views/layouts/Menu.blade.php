@@ -190,6 +190,32 @@
                 <p>Create Class</p>
               </a>
             </li>
+            <li class="nav-header">Manage Teachers</li>
+            <li class="nav-item">
+              <a href="{{route('teachers_index.home')}}" class="nav-link {{(\Request::is('teachers_index')) ? 'active' : '' }}">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <p>Teachers List</p>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a href="{{route('teachers_create.create')}}" class="nav-link {{(\Request::is('teachers_create')) ? 'active' : '' }}">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <p>Create Teacher</p>
+              </a>
+            </li>
+            <li class="nav-header">Manage Students</li>
+            <li class="nav-item">
+              <a href="{{route('students_manages.index')}}" class="nav-link {{(\Request::is('students_manages')) ? 'active' : '' }}">
+                <i class="fas fa-user-graduate"></i>
+                <p>Students List</p>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a href="{{route('students_create.create')}}" class="nav-link {{(\Request::is('students_create')) ? 'active' : '' }}">
+                <i class="fas fa-user-graduate"></i>
+                <p>Create Student</p>
+              </a>
+            </li>
             <li class="nav-header">Check Reviews</li>
             <li class="nav-item">
               <a href="{{route('teachers_review.reviews')}}" class="nav-link {{(\Request::is('teachers_review')) ? 'active' : '' }}">
