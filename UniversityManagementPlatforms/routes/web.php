@@ -23,6 +23,9 @@ Route::middleware('auth')->group(function () {
     Route::resource ('/student_attendance', 'StudentAttendanceController');
 =======
 Route::get('/home', 'HomeController@index')->name('home');
+<<<<<<< HEAD
+>>>>>>> ea786da938f6c87da5fa06c10e58ac638b4b0190
+=======
 >>>>>>> ea786da938f6c87da5fa06c10e58ac638b4b0190
 
 
@@ -33,11 +36,15 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::resource ('/teachers','TeacherController');
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> ea786da938f6c87da5fa06c10e58ac638b4b0190
 //Teacher routes
 Route::get ('/teachers_review','TeacherController@reviews')->name('teachers_review.reviews');
 Route::get ('/teachers_lists','TeacherController@lists')->name('teachers_lists.lists');
 Route::resource ('/teachers','TeacherController');
+<<<<<<< HEAD
 >>>>>>> ea786da938f6c87da5fa06c10e58ac638b4b0190
 
     //Student rootes
@@ -51,6 +58,10 @@ Route::resource ('/teachers','TeacherController');
     Route::resource ('/subjects','SubjectController');
 
 =======
+=======
+
+
+>>>>>>> ea786da938f6c87da5fa06c10e58ac638b4b0190
 //Student routes
 Route::get ('/students_review','StudentController@reviews')->name('students_review.reviews');
 Route::get ('/students_lists','StudentController@lists')->name('students_lists.lists');
@@ -59,6 +70,7 @@ Route::resource ('/students','StudentController');
 //Subject routes
 Route::get ('/subjects_review','SubjectController@reviews')->name('subjects_review.reviews');
 Route::resource ('/subjects','SubjectController');
+<<<<<<< HEAD
 >>>>>>> ea786da938f6c87da5fa06c10e58ac638b4b0190
 
     //Dep rootes
@@ -74,6 +86,10 @@ Route::resource ('/subjects','SubjectController');
     Route::post ('/notif_grp','NotifController@notif_group')->name('notif_grp.notif_group');
     /************************************ End Admin Routes **************************************/
 =======
+=======
+
+
+>>>>>>> ea786da938f6c87da5fa06c10e58ac638b4b0190
 //Dep routes
 Route::get('/departments_index', 'DepartmentController@index')->name('departments_index.index');
 Route::get('/departments_show', 'DepartmentController@show')->name('departments_show.show');
@@ -129,5 +145,8 @@ Route::resource('/reviewTeacher','TeacherController');
 Route::post('/review_Teacher','TeacherController@add_Teacher_review')->name('review_Teacher.add_Teacher_review');
 //*********         End Students Reviews *************** /
  
+<<<<<<< HEAD
+>>>>>>> ea786da938f6c87da5fa06c10e58ac638b4b0190
+=======
 >>>>>>> ea786da938f6c87da5fa06c10e58ac638b4b0190
 });

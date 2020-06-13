@@ -202,10 +202,13 @@
               </a>
             </li> 
 <<<<<<< HEAD
+<<<<<<< HEAD
           @else
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 =======
+=======
+>>>>>>> ea786da938f6c87da5fa06c10e58ac638b4b0190
             <li class="nav-item">
               <a href="{{route('classes_create.create')}}" class="nav-link {{(\Request::is('classes_create')) ? 'active' : '' }}">
                 <i class="fas fa-chalkboard"></i>
@@ -274,6 +277,9 @@
                 <p>Teachers Review</p>
               </a>
           </li>
+<<<<<<< HEAD
+>>>>>>> ea786da938f6c87da5fa06c10e58ac638b4b0190
+=======
 >>>>>>> ea786da938f6c87da5fa06c10e58ac638b4b0190
           <li class="nav-item">
             <a href="{{Route('reviewSubjectt.index')}}" class="nav-link" {{(\Request::is('reviewSubjectt')) ? 'active' : '' }}>
