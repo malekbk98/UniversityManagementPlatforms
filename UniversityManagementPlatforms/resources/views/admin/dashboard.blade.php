@@ -48,7 +48,7 @@
               <div class="icon">
                 <i class="fas fa-chalkboard-teacher"></i>
               </div>
-              <a href="#" class="small-box-footer">
+              <a href="{{route('classes.index')}}" class="small-box-footer">
                 More info <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
@@ -68,7 +68,7 @@
               <div class="icon">
                 <i class="far fa-building"></i>
               </div>
-              <a href="#" class="small-box-footer">
+              <a href="{{route('departments.index')}}" class="small-box-footer">
                 More info <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
@@ -84,7 +84,7 @@
               <div class="icon">
                 <i class="fas fa-flask"></i>
               </div>
-              <a href="#" class="small-box-footer">
+              <a href="{{route('subjects.index')}}" class="small-box-footer">
                 More info <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>
