@@ -16,9 +16,7 @@ class NotifController extends Controller
      */
     public function index()
     {
-        $notifs = Notif::latest()->paginate(10);
 
-        return view('posts.posts_index', compact('notifs'));
     }
 
     /**
@@ -28,7 +26,6 @@ class NotifController extends Controller
      */
     public function create()
     {
-        return view('posts.posts_create');
 
     }
 
@@ -75,23 +72,7 @@ class NotifController extends Controller
        foreach($notif as $note){
            $note['status']="seen";
            $note->save();
-       }
-       dd($notif);
-       
-    }
-
-    public function post(Request $request)
-    {
-        $data = $request->validate([
-            'title' => 'required',
-            'message' => 'required',
-            'status' => 'required'
-        ]);
-
-        $notif =Auth::user()->notifs()->create($data);
-        //notif
-        $notif->user->notify(new NewPost($notif, auth()->user()));
-        return redirect(route('posts.index'));
+       }       
     }
 
 
@@ -116,8 +97,7 @@ class NotifController extends Controller
      */
     public function edit($notif)
     {
-        $notif = Notif::where('id', $notif)->firstOrFail();
-        return view('posts.posts_edit', compact('notif'));
+
     }
 
     /**
@@ -129,15 +109,7 @@ class NotifController extends Controller
      */
     public function update(Request $request, Notif $notif)
     {
-        $data = $request->validate([
-            'title' => 'required',
-            'message' => 'required',
-            'status' => 'required'
-        ]);
 
-        $notif->update($data);
-
-        return redirect()->route('posts.index');
     }
 
     /**
@@ -148,10 +120,7 @@ class NotifController extends Controller
      */
     public function destroy($id)
     {
-        $notif = Notif::find($id);
-        $notif->delete();
-
-        return redirect('/posts');
+        
     }
     private function validationRules()
     {

@@ -93,14 +93,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/classes_create', 'ClasseController@create')->name('classes_create.create');
     Route::resource ('/classes','ClasseController');
 
-    //Posts routes
-    Route::get('/posts_index', 'NotifController@index')->name('posts_index.index');
-    Route::get('/posts_show', 'NotifController@show')->name('posts_show.show');
-    Route::get('/posts_edit', 'NotifController@edit')->name('posts_edit.edit');
-    Route::get('/posts_create', 'NotifController@create')->name('posts_create.create');
-    Route::post('/posts_create','NotifController@post')->name('posts.post');
-    Route::resource ('/posts','NotifController');
-
     //Schedule routes
     Route::get('/schedule_index', 'LessonController@home')->name('schedule_index.home');
     Route::get('/schedule_edit', 'LessonController@edit')->name('schedule_edit.edit');
@@ -143,12 +135,12 @@ Route::middleware('auth')->group(function () {
     View::composer('layouts.Menu', function( $view ){
         $user = auth::user();
         $notif= Notif::where('user_id','=',$user->id)->get();
-        $nbr=0;
+        $nbrs=0;
         foreach($notif as $note){
-            if($note->status=='new'){
-                $nbr++;
+            if($note->status=="new"){
+                $nbrs++;
             }
         }
-        $view->with(compact('user','notif','nbr'));
+        $view->with(compact('user','notif','nbrs'));
     });
 });

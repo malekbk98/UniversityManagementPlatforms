@@ -41,8 +41,8 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#" onclick="seen()">
           <i class="far fa-bell"></i>
-          @if($nbr>0)
-            <span class="badge badge-warning navbar-badge">{{$nbr}}</span>
+          @if($nbrs>0)
+            <span class="badge badge-warning navbar-badge">{{$nbrs}}</span>
           @endif
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -251,19 +251,6 @@
               </a>
             </li>
 
-            <li class="nav-header">Manage Post</li>
-            <li class="nav-item">
-              <a href="{{route('posts.index')}}" class="nav-link {{(\Request::is('posts')) ? 'active' : '' }}">
-                <i class="far fa-clipboard"></i>
-                <p>ALL Post</p>
-              </a>
-            </li> 
-            <li class="nav-item">
-              <a href="{{route('posts_create.create')}}" class="nav-link {{(\Request::is('posts_create')) ? 'active' : '' }}">
-                <i class="far fa-clipboard"></i>
-                <p>Create Post</p>
-              </a>
-            </li>
           <!-- Student Nav Bar-->
          @elseif(auth::user()->position=='student')
          
