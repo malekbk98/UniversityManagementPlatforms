@@ -101,7 +101,12 @@
         <a class="nav-link" data-toggle="dropdown" href="#">
             <div class="user-panel">
                   <div class="image">
-                  <img src="{{asset('storage')}}/{{$detail->photo}}" class="img-circle elevation-2" style="width:35px;height:35px;" alt="User Image">
+                  @if($detail->photo) 
+                    <img src="{{asset('storage')}}/{{$detail->photo}}" class="img-circle elevation-2" style="width:35px;height:35px;" alt="User Image">
+                  @else
+                    <img src="{{asset('dist/img/avatar.png')}}" class="img-circle elevation-2" style="width:35px;height:35px;" alt="User Image">
+                  @endif
+
                 </div>
             </div>
         </a>
@@ -132,9 +137,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{asset('index3.html')}}" class="brand-link">
-      <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">University Admin</span>
+      <span class="brand-text font-weight-light">My University</span>
     </a>
 
     <!-- Sidebar -->

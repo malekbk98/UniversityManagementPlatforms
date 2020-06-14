@@ -14,7 +14,11 @@
 <div class="card card-primary card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
-                  <img class="profile-user-img img-fluid img-circle" src="{{asset('storage')}}/{{ $user->photo}}" style="width:150px;height:150px;">
+                  @if($user->photo)
+                    <img class="profile-user-img img-fluid img-circle" src="{{asset('storage')}}/{{ $user->photo}}" style="width:150px;height:150px;">
+                  @else
+                    <img class="profile-user-img img-fluid img-circle" src="{{asset('dist/img/avatar.png')}}" style="width:150px;height:150px;">
+                  @endif
                 </div>
                 <h3 class="profile-username text-center">{{$user->first_name}} {{$user->last_name}} </h3>
 
