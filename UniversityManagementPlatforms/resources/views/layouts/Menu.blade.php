@@ -101,12 +101,12 @@
         <a class="nav-link" data-toggle="dropdown" href="#">
             <div class="user-panel">
                   <div class="image">
-                  <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+                  <img src="{{asset('storage')}}/{{$detail->photo}}" class="img-circle elevation-2" style="width:35px;height:35px;" alt="User Image">
                 </div>
             </div>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <span class="dropdown-item dropdown-header">Farid Fana</span>
+            <span class="dropdown-item dropdown-header">{{$detail->first_name}} {{$detail->last_name}}</span>
             <div class="dropdown-divider"></div>
             <a href="{{route('profil')}}" class="dropdown-item">
                 <i class="fas fa-user-alt"></i>  Profile
