@@ -14,7 +14,6 @@ class UserController extends Controller
     public function index()
     {   
         $user = auth::user();
-       //dd($user);
       return view ('profile',compact ('user'));
 
     }
@@ -29,6 +28,9 @@ class UserController extends Controller
     public function update(Request $request,user $user)
     {
         $data = $request->validate($this->validationRules());
+        if($request->photo!=null){
+            $data['photo'] = $request->photo->store('uploads', 'public');
+        }
         if($request->new_password!=null){
             $data['password'] = Hash::make($data['new_password']);
         }else{
@@ -37,6 +39,7 @@ class UserController extends Controller
         $update = User::findOrFail($data['id']);
         $update->email=$data['email'];
         $update->password=$data['password'];
+        $update->photo=$data['photo'];
         $update->save();
         return redirect('home');
 }
@@ -45,6 +48,7 @@ class UserController extends Controller
     {
         return [
             'id' => 'string|required',
+            'photo' => 'file|image',
             'email' => 'email|required',
             'password' => ['required', new MatchOldPassword],
             'new_password' => '',

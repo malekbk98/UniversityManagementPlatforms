@@ -45,8 +45,9 @@
                 <p>Admins</p>
               </div>
               <div class="icon">
-                <i class="fa fa-user-graduate"></i>
+                <i class="fa fa-user"></i>
               </div>
+              <a href="#" class="small-box-footer">&nbsp;</a>
             </div>
           </div>
       </div>

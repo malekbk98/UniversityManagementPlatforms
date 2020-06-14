@@ -134,5 +134,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/review_Teacher','TeacherController@add_Teacher_review')->name('review_Teacher.add_Teacher_review');
     //*********         End Students Reviews *************** /
 
-}
-);
+    View::composer('layouts.Menu', function( $view ){
+        $user = auth::user();
+        $view->with('detail', $user);
+    });
+});

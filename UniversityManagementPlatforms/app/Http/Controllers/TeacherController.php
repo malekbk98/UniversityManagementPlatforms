@@ -89,7 +89,6 @@ class TeacherController extends Controller
     public function show(Teacher $teacher)
     {
         
-
         $data=$teacher;
         return view('admin.report',compact('data'));
 
