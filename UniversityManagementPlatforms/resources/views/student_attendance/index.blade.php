@@ -6,7 +6,7 @@
 <div class="row">
 
 
-<div class="col-md-8">
+<div class="col-md-12">
 <table class="table table-bordered">
                   <thead>                  
                     <tr>
@@ -48,9 +48,9 @@
 </div>
 <div class="col-md-4">
 <div class="content">
-<a type="button" class="btn btn-primary float-right" role="button" href="{{route('student_attendance.create')}}" >
+<!--<a type="button" class="btn btn-primary float-right" role="button" href="{{route('student_attendance.create')}}" >
   Add attendance
-</a>
+</a>-->
 </div>
 </div>
 

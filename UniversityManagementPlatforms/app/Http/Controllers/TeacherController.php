@@ -25,8 +25,9 @@ class TeacherController extends Controller
             ->join ('classes','classes.id','=','classe_id')
             ->join('lessons', 'lessons.classe_id', '=', 'classes.id')
             ->join('subjects', 'subjects.id', '=', 'lessons.subject_id')
-            ->join('teachers', 'teachers.id','=', 'subjects.teacher_id')->with('user')->get();
-    
+            ->join('teachers', 'teachers.id','=', 'subjects.teacher_id')
+            ->get();
+
             return view('review.review_teacher',compact('teacher_review'));
     }
 
@@ -37,8 +38,21 @@ class TeacherController extends Controller
         $x->nbr_review++;
         $x->save();
 
-        return redirect('reviewTeacher');
+        return redirect('reviewTeacher')->with('alert', 'Review Sent successfully!');
         
+    }
+
+    public function TeacherNotifList()
+    {
+        $notif =auth::user()->students()
+        ->join ('classes','classes.id','=','classe_id')
+        ->join('lessons', 'lessons.classe_id', '=', 'classes.id')
+        ->join('subjects', 'subjects.id', '=', 'lessons.subject_id')
+        ->join('teachers', 'teachers.id','=', 'subjects.teacher_id')->get();
+        //->join('teachers.position','teachers.user_id','users.first_name','users.last_name','users.email','users.phone','subjects.subject_name','subjects.subject_type')
+        //dd($notif);
+     
+        return view('studentNotif.SendStudentNotif',compact('notif'));
     }
 
 

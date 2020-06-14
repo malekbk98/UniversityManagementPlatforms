@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -92,5 +92,9 @@ Route::post('/review_Subject','SubjectController@add_subject_review')->name('rev
 Route::resource('/reviewTeacher','TeacherController');
 Route::post('/review_Teacher','TeacherController@add_Teacher_review')->name('review_Teacher.add_Teacher_review');
 //*********         End Students Reviews *************** /
- 
+/******** students Notif *************** */
+Route::get('/TeacherListNotif','TeacherController@TeacherNotifList')->name('TeacherListNotif.TeacherNotifList');
+
+
+/* *************** end students Notif ************/
 });

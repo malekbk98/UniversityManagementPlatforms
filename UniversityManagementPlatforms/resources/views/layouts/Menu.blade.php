@@ -27,7 +27,7 @@
   <!-- summernote -->
   <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.css')}}">
   <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">  
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -264,6 +264,22 @@
               </p>
             </a>
           </li>
+          <li class="nav-header">Notifs</li>
+        <li class="nav-item">
+          <a href="{{Route('TeacherListNotif.TeacherNotifList')}}" class="nav-link" {{(\Request::is('TeacherListNotif')) ? 'active' : '' }}>
+            <i class="nav-icon fas fa-exclamation"></i>
+            <p>
+              Send Notification
+            </p>
+          </a>
+        </li>
+        <li class="nav-header">Attendance</li>
+        <li class="nav-item">
+          <a href="{{Route('student_attendance.index')}}" class="nav-link {{(\Request::is('student_attendance')) ? 'active' : '' }}">
+            <i class="fas fa-graduation-cap"></i>
+            <p>My Attendance</p>
+          </a>
+      </li>
               @else
               <li class="nav-item">
                 <a href="{{asset('pages/layout/top-nav-sidebar.html')}}" class="nav-link">
