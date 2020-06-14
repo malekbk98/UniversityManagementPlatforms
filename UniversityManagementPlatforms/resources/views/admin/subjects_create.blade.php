@@ -8,7 +8,7 @@
             @csrf
             <div class="form-group">
                 <label for="title">Subject Name</label>
-                <input type="text" class="form-control" @error('subject_name') is-invalide @enderror name="subject_name" id="subject_name" value={{$subject->subject_name}}>
+                <input type="text" class="form-control" @error('subject_name') is-invalide @enderror name="subject_name" id="subject_name">
                 @error('subject_name')
                     <div class="invalide-feedback">{{ $errors->first('subject_name') }}</div>
                 @enderror
