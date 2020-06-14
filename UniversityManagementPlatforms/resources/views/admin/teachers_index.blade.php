@@ -22,7 +22,7 @@
                 <tbody>
                     @foreach($teachers as $teacher)
                 <tr>
-                    <td><a href="{{ route('teachers.show', $teacher) }}">{{$teacher->user->first_name}} {{$teacher->user->last_name}}</td>
+                    <td><a href="{{ route('teachers.view', $teacher) }}">{{$teacher->user->first_name}} {{$teacher->user->last_name}}</td>
                     <td>{{$teacher->user->email}}</td>
                     <td>{{$teacher->user->phone}}</td>    
                     <td>{{$teacher->salary}}</td>  
