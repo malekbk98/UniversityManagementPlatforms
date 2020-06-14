@@ -35,6 +35,8 @@ class HomeController extends Controller
             $stat['department'] = count(Department::all());
             $stat['student'] = count(User::where('position','=','student')->get());
             $stat['teacher'] = count(User::where('position','=','teacher')->get());
+            $stat['admin'] = count(User::where('position','=','admin')->get());
+
             return view('admin.dashboard',compact('stat'));
         }
         elseif(auth::user()->position=='teacher'){
@@ -55,6 +57,10 @@ class HomeController extends Controller
             $stat['classe'] = count($classatt);
             $stat['student'] = $student_nbr;
             return view('teacher_attendance.dashboard',compact('stat'));
+        }
+        elseif(auth::user()->position=='student'){
+
+            return view('student_attendance.dashboard');
         }
     }
 }

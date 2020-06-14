@@ -37,27 +37,36 @@
               </a>
             </div>
           </div>
-        <!-- ./col -->
-        <div class="col-lg-4 col-6">
+          <div class="col-lg-4 col-6">
             <!-- small card -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>{{$stat['classe']}}</h3>
-                <p>Classes</p>
+                <h3>{{$stat['admin']}}</h3>
+                <p>Admins</p>
               </div>
               <div class="icon">
-                <i class="fas fa-chalkboard-teacher"></i>
+                <i class="fa fa-user"></i>
               </div>
-              <a href="{{route('classes.index')}}" class="small-box-footer">
-                More info <i class="fas fa-arrow-circle-right"></i>
-              </a>
+              <a href="#" class="small-box-footer">&nbsp;</a>
             </div>
           </div>
-        <!-- ./col -->
-        
-        <!-- ./col -->
       </div>
       <div class="row">
+        <div class="col-lg-4 col-6">
+          <!-- small card -->
+          <div class="small-box bg-info">
+            <div class="inner">
+              <h3>{{$stat['classe']}}</h3>
+              <p>Classes</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <a href="{{route('classes.index')}}" class="small-box-footer">
+              More info <i class="fas fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
         <div class="col-lg-4 col-6">
             <!-- small card -->
             <div class="small-box bg-info">

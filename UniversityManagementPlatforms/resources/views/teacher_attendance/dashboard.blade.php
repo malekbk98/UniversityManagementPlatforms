@@ -11,7 +11,7 @@
           <div class="small-box bg-info">
             <div class="inner">
               <h3>{{$stat['student']}}</h3>
-              <p>Students</p>
+              <p>My Students</p>
             </div>
             <div class="icon">
               <i class="fa fa-user-graduate"></i>
@@ -27,7 +27,7 @@
             <div class="small-box bg-info">
               <div class="inner">
                 <h3>{{$stat['classe']}}</h3>
-                <p>Classes</p>
+                <p>My Classes</p>
               </div>
               <div class="icon">
                 <i class="fas fa-chalkboard-teacher"></i>
@@ -42,7 +42,7 @@
             <div class="small-box bg-info">
               <div class="inner">
                 <h3>{{$stat['classe']}}</h3>
-                <p>Subjects</p>
+                <p>My Subjects</p>
               </div>
               <div class="icon">
                 <i class="fas fa-flask"></i>

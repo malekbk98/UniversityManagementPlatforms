@@ -88,8 +88,6 @@ class TeacherController extends Controller
      */
     public function show(Teacher $teacher)
     {
-        return view('admin.teachers_show', compact('teacher'));
-
         $data=$teacher;
         return view('admin.report',compact('data'));
 
