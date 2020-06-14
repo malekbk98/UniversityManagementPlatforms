@@ -97,6 +97,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/schedule_edit', 'LessonController@edit')->name('schedule_edit.edit');
     Route::get('/schedule_create', 'LessonController@create')->name('schedule_create.create');
     Route::resource ('/schedules', 'LessonController');
+    Route::get ('/schedule_student', 'LessonController@index1');
+
 
     //Notif routes
     Route::post ('/store_report','NotifController@store')->name('notif.report');
