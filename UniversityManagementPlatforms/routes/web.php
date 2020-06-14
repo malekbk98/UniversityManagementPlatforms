@@ -42,7 +42,9 @@ Route::middleware('auth')->group(function () {
 
 
     //Subject rootes
-    Route::get ('/subjects_review','SubjectController@reviews')->name('subjects_review.reviews');
+    Route::get ('/subjects_index','SubjectController@home')->name('subjects_index.home');
+    Route::get ('/subjects_create','SubjectController@create')->name('subjects_create.create');
+    Route::get ('/subjects_edit','SubjectController@edit')->name('subjects_create.edit');    Route::get ('/subjects_review','SubjectController@reviews')->name('subjects_review.reviews');
     Route::resource ('/subjects','SubjectController');
 
     //Student routes
@@ -99,7 +101,9 @@ Route::middleware('auth')->group(function () {
     //Notif routes
     Route::post ('/store_report','NotifController@store')->name('notif.report');
     Route::post ('/notif_grp','NotifController@notif_group')->name('notif_grp.notif_group');;
-
+    //User rootes
+     Route::get ('/user_create','Auth\RegisterController@view')->name('user_create.view');
+    Route::post ('/user_create','Auth\RegisterController@post')->name('user_create.post');
     /************************************ End Admin Routes **************************************/
     /************************************ Teacher Routes ****************************************/
     Route::resource ('/student_attendance', 'StudentAttendanceController');

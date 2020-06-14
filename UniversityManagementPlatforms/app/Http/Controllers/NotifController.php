@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-
+use App\Notifications\NewPost;
 use App\Notif;
 use Illuminate\Http\Request;
 
@@ -79,7 +79,8 @@ class NotifController extends Controller
         ]);
 
         $notif =Auth::user()->notifs()->create($data);
-
+        //notif
+        $notif->user->notify(new NewPost($notif, auth()->user()));
         return redirect(route('posts.index'));
     }
 
