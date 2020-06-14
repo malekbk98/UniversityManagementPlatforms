@@ -69,6 +69,16 @@ class NotifController extends Controller
             return redirect('/teachers_lists')->with('alert', 'Notification Sent!');
         }
     }
+    public function seen(Request $request)
+    { 
+       $notif=Notif::where('user_id','=',auth::user()->id)->get();
+       foreach($notif as $note){
+           $note['status']="seen";
+           $note->save();
+       }
+       dd($notif);
+       
+    }
 
     public function post(Request $request)
     {

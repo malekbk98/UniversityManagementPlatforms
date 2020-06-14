@@ -10,9 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Notif;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -133,8 +134,18 @@ Route::middleware('auth')->group(function () {
     Route::post('/review_Teacher','TeacherController@add_Teacher_review')->name('review_Teacher.add_Teacher_review');
     //*********         End Students Reviews *************** /
 
+
+    Route::get('/noteUpdate','NotifController@seen')->name('noteUpdate.seen');
+
     View::composer('layouts.Menu', function( $view ){
         $user = auth::user();
-        $view->with('detail', $user);
+        $notif= Notif::where('user_id','=',$user->id)->get();
+        $nbr=0;
+        foreach($notif as $note){
+            if($note->status=='new'){
+                $nbr++;
+            }
+        }
+        $view->with(compact('user','notif','nbr'));
     });
 });

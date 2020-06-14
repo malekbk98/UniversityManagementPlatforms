@@ -6,6 +6,8 @@ use App\Classe;
 use App\User;
 use App\Subject;
 use App\Student;
+use App\Teacher;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,8 +35,8 @@ class HomeController extends Controller
             $stat['subject'] = count(Subject::all());
             $stat['classe'] = count(Classe::all());
             $stat['department'] = count(Department::all());
-            $stat['student'] = count(User::where('position','=','student')->get());
-            $stat['teacher'] = count(User::where('position','=','teacher')->get());
+            $stat['student'] = count(Student::all());
+            $stat['teacher'] = count(Teacher::all());
             $stat['admin'] = count(User::where('position','=','admin')->get());
 
             return view('admin.dashboard',compact('stat'));

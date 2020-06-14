@@ -39,61 +39,30 @@
       <!-- Notifications Dropdown Menu -->
       @if (auth::user()->position!='admin')
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
+        <a class="nav-link" data-toggle="dropdown" href="#" onclick="seen()">
           <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
+          @if($nbr>0)
+            <span class="badge badge-warning navbar-badge">{{$nbr}}</span>
+          @endif
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          @foreach($notif as $note)
             <a href="#" class="dropdown-item">
-              <!--User Start -->
               <div class="media">
-                <img src="{{asset('dist/img/user1-128x128.jpg')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                <img src="{{asset('dist/img/admin.png')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                 <div class="media-body">
+                  @if($note->status=="new")
+                    <span class="badge badge-danger">New</span>
+                  @endif
                   <h3 class="dropdown-item-title">
-                    Brad Diesel
-                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                    {{$note->title}}
                   </h3>
-                  <p class="text-sm">Call me whenever you can...</p>
-                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                  <p class="text-sm">{{$note->message}}</p>
+                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>{{$note->created_at}}</p>
                 </div>
               </div>
-              <!--User End -->
             </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <!--User Start -->
-              <div class="media">
-                <img src="{{asset('dist/img/user8-128x128.jpg')}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                <div class="media-body">
-                  <h3 class="dropdown-item-title">
-                    John Pierce
-                    <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                  </h3>
-                  <p class="text-sm">I got your message bro</p>
-                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                </div>
-              </div>
-              <!--User End -->
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <!--User Start -->
-              <div class="media">
-                <img src="{{asset('dist/img/user3-128x128.jpg')}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                <div class="media-body">
-                  <h3 class="dropdown-item-title">
-                    Nora Silvester
-                    <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                  </h3>
-                  <p class="text-sm">The subject goes here</p>
-                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                </div>
-              </div>
-              <!--User End -->
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-          </div>
+          @endforeach
       </li>
     @endif
       <!-- User Dropdown Menu -->
@@ -101,17 +70,16 @@
         <a class="nav-link" data-toggle="dropdown" href="#">
             <div class="user-panel">
                   <div class="image">
-                  @if($detail->photo) 
-                    <img src="{{asset('storage')}}/{{$detail->photo}}" class="img-circle elevation-2" style="width:35px;height:35px;" alt="User Image">
+                  @if($user->photo) 
+                    <img src="{{asset('storage')}}/{{$user->photo}}" class="img-circle elevation-2" style="width:35px;height:35px;" alt="User Image">
                   @else
                     <img src="{{asset('dist/img/avatar.png')}}" class="img-circle elevation-2" style="width:35px;height:35px;" alt="User Image">
                   @endif
-
                 </div>
             </div>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <span class="dropdown-item dropdown-header">{{$detail->first_name}} {{$detail->last_name}}</span>
+            <span class="dropdown-item dropdown-header">{{$user->first_name}} {{$user->last_name}}</span>
             <div class="dropdown-divider"></div>
             <a href="{{route('profil')}}" class="dropdown-item">
                 <i class="fas fa-user-alt"></i>  Profile
@@ -158,13 +126,13 @@
             <li class="nav-item">
               <a href="{{route('students_lists.lists')}}" class="nav-link {{(\Request::is('students_lists')) ? 'active' : '' }}">
                 <i class="fas fa-users"></i>
-                <p>Students List</p>
+                <p>Students</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="{{route('teachers_lists.lists')}}" class="nav-link {{(\Request::is('teachers_lists')) ? 'active' : '' }}">
                 <i class="fas fa-users"></i>
-                <p>Teachers List</p>
+                <p>Teachers</p>
               </a>
             </li>
             <li class="nav-header">Manage Department</li>
@@ -370,6 +338,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
 <script src="{{asset('js/table.js')}}"></script>
+<script src="{{asset('js/customjs.js')}}"></script>
+
 
 </body>
 </html>
