@@ -193,6 +193,26 @@
                 <p>Create Class</p>
               </a>
             </li>
+            <li class="nav-header">Manage Subject</li>
+            <li class="nav-item">
+              <a href="{{route('subjects_index.home')}}" class="nav-link {{(\Request::is('subjects_index')) ? 'active' : '' }}">
+                <i class="fas fa-flask"></i>
+                <p>Subjects List</p>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a href="{{route('subjects_create.create')}}" class="nav-link {{(\Request::is('subjects_create')) ? 'active' : '' }}">
+                <i class="fas fa-flask"></i>
+                <p>Create Subject</p>
+              </a>
+            </li>
+            <li class="nav-header">Manage User</li>
+            <li class="nav-item">
+              <a href="{{route('user_create.view')}}" class="nav-link {{(\Request::is('user_create')) ? 'active' : '' }}">
+                <i class="fas fa-users"></i>
+                <p>Create User</p>
+              </a>
+            </li>
             <li class="nav-header">Manage Teachers</li>
             <li class="nav-item">
               <a href="{{route('teachers_index.home')}}" class="nav-link {{(\Request::is('teachers_index')) ? 'active' : '' }}">
