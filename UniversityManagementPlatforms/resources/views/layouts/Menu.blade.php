@@ -41,58 +41,24 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
+          <span class="badge badge-warning navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <a href="#" class="dropdown-item">
-              <!--User Start -->
-              <div class="media">
-                <img src="{{asset('dist/img/user1-128x128.jpg')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                <div class="media-body">
-                  <h3 class="dropdown-item-title">
-                    Brad Diesel
-                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                  </h3>
-                  <p class="text-sm">Call me whenever you can...</p>
-                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                </div>
-              </div>
-              <!--User End -->
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <!--User Start -->
-              <div class="media">
-                <img src="{{asset('dist/img/user8-128x128.jpg')}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                <div class="media-body">
-                  <h3 class="dropdown-item-title">
-                    John Pierce
-                    <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                  </h3>
-                  <p class="text-sm">I got your message bro</p>
-                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                </div>
-              </div>
-              <!--User End -->
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <!--User Start -->
-              <div class="media">
-                <img src="{{asset('dist/img/user3-128x128.jpg')}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                <div class="media-body">
-                  <h3 class="dropdown-item-title">
-                    Nora Silvester
-                    <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                  </h3>
-                  <p class="text-sm">The subject goes here</p>
-                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                </div>
-              </div>
-              <!--User End -->
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+          @foreach (auth()->user()->unreadNotifications as $notification)
+          <a href="#" class="dropdown-item">
+          <div class="media">
+            <img src="{{asset('dist/img/user1-128x128.jpg')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+            <div class="media-body">
+              <h3 class="dropdown-item-title">
+                {{$notification->data['lastname']}}
+                <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+              </h3>
+              <p class="text-sm"> {{$notification->data['Notiftitle']}}</p>
+              <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>{{$notification->created_at}}</p>
+            </div>
+          </div>
+        </a>
+          @endforeach
           </div>
       </li>
     @endif
@@ -108,7 +74,7 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <span class="dropdown-item dropdown-header">Farid Fana</span>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
+            <a href="{{route('profil')}}" class="dropdown-item">
                 <i class="fas fa-user-alt"></i>  Profile
             </a>
             <div class="dropdown-divider"></div> 
@@ -188,6 +154,26 @@
               <a href="{{route('classes_create.create')}}" class="nav-link {{(\Request::is('classes_create')) ? 'active' : '' }}">
                 <i class="fas fa-chalkboard"></i>
                 <p>Create Class</p>
+              </a>
+            </li>
+            <li class="nav-header">Manage Subject</li>
+            <li class="nav-item">
+              <a href="{{route('subjects_index.home')}}" class="nav-link {{(\Request::is('subjects_index')) ? 'active' : '' }}">
+                <i class="fas fa-flask"></i>
+                <p>Subjects List</p>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a href="{{route('subjects_create.create')}}" class="nav-link {{(\Request::is('subjects_create')) ? 'active' : '' }}">
+                <i class="fas fa-flask"></i>
+                <p>Create Subject</p>
+              </a>
+            </li>
+            <li class="nav-header">Manage User</li>
+            <li class="nav-item">
+              <a href="{{route('user_create.view')}}" class="nav-link {{(\Request::is('user_create')) ? 'active' : '' }}">
+                <i class="fas fa-users"></i>
+                <p>Create User</p>
               </a>
             </li>
             <li class="nav-header">Manage Teachers</li>
