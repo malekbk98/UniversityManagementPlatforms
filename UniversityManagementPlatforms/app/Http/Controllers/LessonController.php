@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Classe;
 use App\Teacher;
+use App\Student;
+
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Lesson;
@@ -16,6 +18,16 @@ class LessonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function index1()
+    {
+        
+        $student_schedule =auth::user()->students()
+        ->join ('classes','classes.id','=','students.classe_id')
+        ->join('lessons', 'lessons.classe_id', '=', 'classes.id')
+        ->join ('subjects','lessons.subject_id','=','subjects.id')->get();
+   //dd($teacher_schedule);
+        return view ('student_attendance.schedule',compact ('student_schedule'));
+    }
     public function index()
     {
         
@@ -25,6 +37,7 @@ class LessonController extends Controller
    //dd($teacher_schedule);
         return view ('classe.schedule',compact ('teacher_schedule'));
     }
+
     public function home()
     {
         $lesson = Lesson::with('classe','subject')->latest()->paginate(10);
