@@ -53,6 +53,8 @@ Route::middleware('auth')->group(function () {
     //Subject routes
     Route::get ('/subjects_review','SubjectController@reviews')->name('subjects_review.reviews');
     Route::resource ('/subjects','SubjectController');
+    Route::get('/profil','UserController@index')->name('profil');
+    Route::resource('/profile','UserController');
 
 
     //Dep rootes
