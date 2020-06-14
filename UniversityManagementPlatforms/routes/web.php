@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/teachers_index', 'TeacherController@home')->name('teachers_index.home');
     Route::get('/teachers_edit', 'TeacherController@edit')->name('teachers_edit.edit');
     Route::get('/teachers_create', 'TeacherController@create')->name('teachers_create.create');
+    Route::get('/teachers/{id}', 'TeacherController@view')->name('teachers.view');
     Route::resource ('/teachers','TeacherController');
 
     //Student rootes
@@ -105,6 +106,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/schedule_edit', 'LessonController@edit')->name('schedule_edit.edit');
     Route::get('/schedule_create', 'LessonController@create')->name('schedule_create.create');
     Route::resource ('/schedules', 'LessonController');
+    Route::get ('/schedule_student', 'LessonController@index1');
+
 
     //Notif routes
     Route::post ('/store_report','NotifController@store')->name('notif.report');

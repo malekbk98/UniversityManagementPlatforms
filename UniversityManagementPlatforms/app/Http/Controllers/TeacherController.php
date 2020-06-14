@@ -88,9 +88,17 @@ class TeacherController extends Controller
      */
     public function show(Teacher $teacher)
     {
+        
         $data=$teacher;
         return view('admin.report',compact('data'));
 
+    }
+    public function view( $teach)
+    {
+        $teach = Teacher::where('id', $teach)->firstOrFail();
+        return view('admin.teachers_show', compact('teach'));
+
+        
     }
 
     /**
