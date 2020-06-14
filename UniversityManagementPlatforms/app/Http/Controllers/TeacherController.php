@@ -98,6 +98,7 @@ class TeacherController extends Controller
         $teach = Teacher::where('id', $teach)->firstOrFail();
         return view('admin.teachers_show', compact('teach'));
 
+        
     }
 
     /**
