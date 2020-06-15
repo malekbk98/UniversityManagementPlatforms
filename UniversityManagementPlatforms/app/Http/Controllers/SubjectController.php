@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Teacher;
+use App\User;
 use App\Subject;
 use App\Student;
 use App\Lesson;
@@ -26,6 +27,13 @@ class SubjectController extends Controller
         return view('review.review',compact('subject_review'));
 
     }
+    public function home()
+    {   
+        $subjects = Subject::with('teachers')->latest()->paginate(10);
+
+        return view('admin.subjects_index', compact('subjects'));
+    }
+
 
     public function add_subject_review(Request $request, Subject $subject)
     {
@@ -45,8 +53,8 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
-    }
+        $teachers = Teacher::all();
+        return view('admin.subjects_create',compact('teachers'));    }
 
     /**
      * Store a newly created resource in storage.
@@ -56,7 +64,18 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data =request()->validate([
+            'subject_name' => 'required',
+            'teacher_id' => 'required',
+            'subject_cof' => 'required',
+            'subject_max_abs' => 'required',
+            'subject_type' => 'required',
+            'total_review' => 'required',
+            'nbr_review' => 'required'
+        ]);
+        
+        Subject::create($data);
+        return redirect(route('subjects_index.home'));
     }
 
     /**
@@ -76,9 +95,11 @@ class SubjectController extends Controller
      * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subject $subject)
+    public function edit($subject)
     {
-        //
+        $subject = Subject::where('id', $subject)->firstOrFail();
+        $teachers = Teacher::all();
+        return view('admin.subjects_edit', compact('subject','teachers'));
     }
 
     /**
@@ -88,9 +109,20 @@ class SubjectController extends Controller
      * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subject $subject)
+    public function update(Request $request, $subject)
     {
-        //
+        $subject = Subject::where('id', $subject)->firstOrFail();
+        $data =request()->validate([
+            'subject_name' => 'required',
+            'teacher_id' => 'required',
+            'subject_cof' => 'required',
+            'subject_max_abs' => 'required',
+            'subject_type' => 'required',
+            'total_review' => 'required',
+            'nbr_review' => 'required'
+        ]);
+        $subject->update($data);
+        return redirect()->route('subjects_index.home');
     }
 
     /**
@@ -101,7 +133,9 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject)
     {
-        //
+        Subject::destroy($subject->id);
+
+        return redirect()->route('subjects_index.home');
     }
     public function reviews()
     {

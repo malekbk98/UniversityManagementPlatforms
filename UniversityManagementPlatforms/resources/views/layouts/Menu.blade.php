@@ -37,76 +37,51 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Notifications Dropdown Menu -->
+      @if (auth::user()->position!='admin')
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
+        <a class="nav-link" data-toggle="dropdown" href="#" onclick="seen()">
           <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
+          @if($nbr>0)
+            <span class="badge badge-warning navbar-badge">{{$nbr}}</span>
+          @endif
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          @foreach($notif as $note)
             <a href="#" class="dropdown-item">
-              <!--User Start -->
               <div class="media">
-                <img src="{{asset('dist/img/user1-128x128.jpg')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                <img src="{{asset('dist/img/admin.png')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                 <div class="media-body">
+                  @if($note->status=="new")
+                    <span class="badge badge-danger">New</span>
+                  @endif
                   <h3 class="dropdown-item-title">
-                    Brad Diesel
-                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                    {{$note->title}}
                   </h3>
-                  <p class="text-sm">Call me whenever you can...</p>
-                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                  <p class="text-sm">{{$note->message}}</p>
+                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>{{$note->created_at}}</p>
                 </div>
               </div>
-              <!--User End -->
             </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <!--User Start -->
-              <div class="media">
-                <img src="{{asset('dist/img/user8-128x128.jpg')}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                <div class="media-body">
-                  <h3 class="dropdown-item-title">
-                    John Pierce
-                    <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                  </h3>
-                  <p class="text-sm">I got your message bro</p>
-                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                </div>
-              </div>
-              <!--User End -->
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <!--User Start -->
-              <div class="media">
-                <img src="{{asset('dist/img/user3-128x128.jpg')}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                <div class="media-body">
-                  <h3 class="dropdown-item-title">
-                    Nora Silvester
-                    <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                  </h3>
-                  <p class="text-sm">The subject goes here</p>
-                  <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                </div>
-              </div>
-              <!--User End -->
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-          </div>
+          @endforeach
       </li>
+    @endif
       <!-- User Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
             <div class="user-panel">
                   <div class="image">
-                  <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+                  @if($user->photo) 
+                    <img src="{{asset('storage')}}/{{$user->photo}}" class="img-circle elevation-2" style="width:35px;height:35px;" alt="User Image">
+                  @else
+                    <img src="{{asset('dist/img/avatar.png')}}" class="img-circle elevation-2" style="width:35px;height:35px;" alt="User Image">
+                  @endif
                 </div>
             </div>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <span class="dropdown-item dropdown-header">Farid Fana</span>
+            <span class="dropdown-item dropdown-header">{{$user->first_name}} {{$user->last_name}}</span>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
+            <a href="{{route('profil')}}" class="dropdown-item">
                 <i class="fas fa-user-alt"></i>  Profile
             </a>
             <div class="dropdown-divider"></div> 
@@ -130,9 +105,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{asset('index3.html')}}" class="brand-link">
-      <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">University Admin</span>
+      <span class="brand-text font-weight-light">My University</span>
     </a>
 
     <!-- Sidebar -->
@@ -140,8 +113,8 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link {{(\Request::is('home')) ? 'active' : '' }}">
+          <li class="nav-item">
+            <a href="{{route('home')}}" class="nav-link {{(\Request::is('home')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -149,23 +122,17 @@
             </a>
           </li>
           @if (auth::user()->position=='admin')
-          <li class="nav-header">Check Reviews</li>
+          <li class="nav-header">Notifications & Search</li>
             <li class="nav-item">
-              <a href="{{route('teachers_review.reviews')}}" class="nav-link {{(\Request::is('teachers_review')) ? 'active' : '' }}">
-                <i class="fas fa-chalkboard-teacher"></i>
-                <p>Teachers Reviews</p>
+              <a href="{{route('students_lists.lists')}}" class="nav-link {{(\Request::is('students_lists')) ? 'active' : '' }}">
+                <i class="fas fa-users"></i>
+                <p>Students</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{route('students_review.reviews')}}" class="nav-link {{(\Request::is('students_review')) ? 'active' : '' }}">
-                <i class="fas fa-user-graduate"></i>
-                <p>Students Reviews</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{route('subjects_review.reviews')}}" class="nav-link {{(\Request::is('subjects_review')) ? 'active' : '' }}">
-                <i class="fas fa-flask"></i>
-                <p>Subjects Reviews</p>
+              <a href="{{route('teachers_lists.lists')}}" class="nav-link {{(\Request::is('teachers_lists')) ? 'active' : '' }}">
+                <i class="fas fa-users"></i>
+                <p>Teachers</p>
               </a>
             </li>
             <li class="nav-header">Manage Department</li>
@@ -194,18 +161,69 @@
                 <p>Create Class</p>
               </a>
             </li>
-            <li class="nav-header">Notifications & Search</li> 
-            <li class="nav-header">Students Lists</li>
+            <li class="nav-header">Manage Subject</li>
             <li class="nav-item">
-              <a href="{{route('students_lists.lists')}}" class="nav-link {{(\Request::is('students_lists')) ? 'active' : '' }}">
+              <a href="{{route('subjects_index.home')}}" class="nav-link {{(\Request::is('subjects_index')) ? 'active' : '' }}">
+                <i class="fas fa-flask"></i>
+                <p>Subjects List</p>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a href="{{route('subjects_create.create')}}" class="nav-link {{(\Request::is('subjects_create')) ? 'active' : '' }}">
+                <i class="fas fa-flask"></i>
+                <p>Create Subject</p>
+              </a>
+            </li>
+            <li class="nav-header">Manage User</li>
+            <li class="nav-item">
+              <a href="{{route('user_create.view')}}" class="nav-link {{(\Request::is('user_create')) ? 'active' : '' }}">
                 <i class="fas fa-users"></i>
+                <p>Create User</p>
+              </a>
+            </li>
+            <li class="nav-header">Manage Teachers</li>
+            <li class="nav-item">
+              <a href="{{route('teachers_index.home')}}" class="nav-link {{(\Request::is('teachers_index')) ? 'active' : '' }}">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <p>Teachers List</p>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a href="{{route('teachers_create.create')}}" class="nav-link {{(\Request::is('teachers_create')) ? 'active' : '' }}">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <p>Create Teacher</p>
+              </a>
+            </li>
+            <li class="nav-header">Manage Students</li>
+            <li class="nav-item">
+              <a href="{{route('students_manages.index')}}" class="nav-link {{(\Request::is('students_manages')) ? 'active' : '' }}">
+                <i class="fas fa-user-graduate"></i>
                 <p>Students List</p>
+              </a>
+            </li> 
+            <li class="nav-item">
+              <a href="{{route('students_create.create')}}" class="nav-link {{(\Request::is('students_create')) ? 'active' : '' }}">
+                <i class="fas fa-user-graduate"></i>
+                <p>Create Student</p>
+              </a>
+            </li>
+            <li class="nav-header">Check Reviews</li>
+            <li class="nav-item">
+              <a href="{{route('teachers_review.reviews')}}" class="nav-link {{(\Request::is('teachers_review')) ? 'active' : '' }}">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <p>Teachers Reviews</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{route('teachers_lists.lists')}}" class="nav-link {{(\Request::is('teachers_lists')) ? 'active' : '' }}">
-                <i class="fas fa-users"></i>
-                <p>Teachers List</p>
+              <a href="{{route('students_review.reviews')}}" class="nav-link {{(\Request::is('students_review')) ? 'active' : '' }}">
+                <i class="fas fa-user-graduate"></i>
+                <p>Students Reviews</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('subjects_review.reviews')}}" class="nav-link {{(\Request::is('subjects_review')) ? 'active' : '' }}">
+                <i class="fas fa-flask"></i>
+                <p>Subjects Reviews</p>
               </a>
             </li>
             @elseif(auth::user()->position=='teacher')
@@ -264,6 +282,7 @@
               </p>
             </a>
           </li>
+<<<<<<< HEAD
           <li class="nav-header">Notifs</li>
         <li class="nav-item">
           <a href="{{Route('TeacherListNotif.TeacherNotifList')}}" class="nav-link" {{(\Request::is('TeacherListNotif')) ? 'active' : '' }}>
@@ -743,6 +762,8 @@
               <p>Informational</p>
             </a>
           </li>
+=======
+>>>>>>> 09138e811220899f8ff4348b422d6e7dcd205b9d
         @endif
       </ul>
       </nav>
@@ -799,6 +820,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
 <script src="{{asset('js/table.js')}}"></script>
+<script src="{{asset('js/customjs.js')}}"></script>
+
 
 </body>
 </html>

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
+    protected $guarded = [];
+
     public function student_attendances()
     {
         return $this->hasMany('App\StudentAttendance');

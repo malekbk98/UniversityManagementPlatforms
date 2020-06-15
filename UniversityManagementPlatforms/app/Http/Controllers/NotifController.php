@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-
+use App\Notifications\NewPost;
 use App\Notif;
 use Illuminate\Http\Request;
 
@@ -69,6 +69,16 @@ class NotifController extends Controller
             return redirect('/teachers_lists')->with('alert', 'Notification Sent!');
         }
     }
+    public function seen(Request $request)
+    { 
+       $notif=Notif::where('user_id','=',auth::user()->id)->get();
+       foreach($notif as $note){
+           $note['status']="seen";
+           $note->save();
+       }
+       dd($notif);
+       
+    }
 
     public function post(Request $request)
     {
@@ -79,7 +89,8 @@ class NotifController extends Controller
         ]);
 
         $notif =Auth::user()->notifs()->create($data);
-
+        //notif
+        $notif->user->notify(new NewPost($notif, auth()->user()));
         return redirect(route('posts.index'));
     }
 
