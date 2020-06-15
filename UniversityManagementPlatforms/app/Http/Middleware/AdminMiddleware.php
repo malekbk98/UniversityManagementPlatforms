@@ -15,9 +15,11 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()->position != 'admin') {
-            return redirect('home');
+        if(Auth::user()->position == 'admin'){
+            return $next($request);
+
+        }else{
+            return redirect('/home');
         }
-        return $next($request);
-}
+    }
 }

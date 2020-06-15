@@ -15,10 +15,11 @@ class TeacherMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()->position != 'teacher') {
-            return redirect('home');
-        }
-        return $next($request);
+        if(Auth::user()->position == 'teacher'){
+            return $next($request);
 
-}
+        }else{
+            return redirect('/home');
+        }
+    }
 }
