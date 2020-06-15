@@ -23,13 +23,12 @@
 <body class="hold-transition login-page ">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>Login</b>My University</a>
+    
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
-
+      <h2 class="text-center"><b>Login</b>My University</h2><br>
       <form action="{{ route('login') }}" method="POST">
         @csrf
         <div class="input-group mb-3">
@@ -61,14 +60,6 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-                {{ __('Remember Me') }}
-              </label>
-            </div>
-          </div>
           <!-- /.col -->
           <div class="col-4">
             <button type="submit" class="btn btn-primary btn-block">{{ __('Login') }}</button>
@@ -87,14 +78,6 @@
         </a>
       </div> -->
       <!-- /.social-auth-links -->
-
-      <p class="mb-1">
-        @if (Route::has('password.request'))
-         <a class="btn btn-link" href="{{ route('password.request') }}">
-             {{ __('Forgot Your Password?') }}
-         </a>
-        @endif 
-      </p>
     </div>
     <!-- /.login-card-body -->
   </div>

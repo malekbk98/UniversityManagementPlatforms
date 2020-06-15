@@ -21,11 +21,6 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
 
-// add subject review******
-Route::resource('/reviewSubjectt','SubjectController');
-Route::post('/review_Subject','SubjectController@add_subject_review')->name('review_Subject.add_subject_review');
-//*********
-
 // add Teacher review******
 Route::resource('/reviewTeacher','TeacherController');
 Route::post('/review_Teacher','TeacherController@add_Teacher_review')->name('review_Teacher.add_Teacher_review');
@@ -37,7 +32,6 @@ Route::get('/TeacherListNotif','TeacherController@TeacherNotifList')->name('Teac
 /* *************** end students Notif ************/
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource ('/student_attendance', 'StudentAttendanceController');
-    Route::get('/home', 'HomeController@index')->name('home');
 
     /************************************ Admin Routes ****************************************/
     //Teacher routes
@@ -108,15 +102,7 @@ Route::get('/TeacherListNotif','TeacherController@TeacherNotifList')->name('Teac
     Route::get('/classes_edit', 'ClasseController@edit')->name('classes_edit.edit');
     Route::get('/classes_create', 'ClasseController@create')->name('classes_create.create');
     Route::resource ('/classes','ClasseController');
-
-    //Schedule routes
-    Route::get('/schedule_index', 'LessonController@home')->name('schedule_index.home');
-    Route::get('/schedule_edit', 'LessonController@edit')->name('schedule_edit.edit');
-    Route::get('/schedule_create', 'LessonController@create')->name('schedule_create.create');
-    Route::resource ('/schedules', 'LessonController');
-    Route::get ('/schedule_student', 'LessonController@index1');
-
-
+ 
     //Notif routes
     Route::post ('/store_report','NotifController@store')->name('notif.report');
     Route::post ('/notif_grp','NotifController@notif_group')->name('notif_grp.notif_group');;
@@ -124,6 +110,7 @@ Route::get('/TeacherListNotif','TeacherController@TeacherNotifList')->name('Teac
     Route::get ('/user_create','Auth\RegisterController@view')->name('user_create.view');
     Route::post ('/user_create','Auth\RegisterController@post')->name('user_create.post');
 });
+
     /************************************ End Admin Routes **************************************/
     /************************************ Teacher Routes ****************************************/
     Route::group(['middleware' => ['auth', 'teacher']],function(){
@@ -144,13 +131,17 @@ Route::get('/TeacherListNotif','TeacherController@TeacherNotifList')->name('Teac
     //*********
 
     // add Teacher review******
-    Route::resource('/reviewTeacher','TeacherController');
-    Route::post('/review_Teacher','TeacherController@add_Teacher_review')->name('review_Teacher.add_Teacher_review');
     //*********         End Students Reviews *************** /
-
-
     Route::get('/noteUpdate','NotifController@seen')->name('noteUpdate.seen');
 
+
+    //Schedule routes
+    Route::get('/schedule_index', 'LessonController@home')->name('schedule_index.home');
+    Route::get('/schedule_edit', 'LessonController@edit')->name('schedule_edit.edit');
+    Route::get('/schedule_create', 'LessonController@create')->name('schedule_create.create');
+    Route::resource ('/schedules', 'LessonController');
+    Route::get ('/schedule_student', 'LessonController@index1')->name('schedule_student.index1');
+  
     View::composer('layouts.Menu', function( $view ){
         $user = auth::user();
         $notif= Notif::where('user_id','=',$user->id)->get();

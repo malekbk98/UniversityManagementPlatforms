@@ -61,8 +61,16 @@ class HomeController extends Controller
             return view('teacher_attendance.dashboard',compact('stat'));
         }
         elseif(auth::user()->position=='student'){
+            $student_schedule =auth::user()->students()
+            ->join ('classes','classes.id','=','students.classe_id')
+            ->join('lessons', 'lessons.classe_id', '=', 'classes.id')
+            ->join ('subjects','lessons.subject_id','=','subjects.id')->get();
+            
+            $studentatt =auth::user()->students()->join ('student_attendances','student_id','=','students.id')->join('lessons', 'lessons.id', '=', 'student_attendances.lesson_id')->join('subjects', 'subjects.id', '=', 'lessons.subject_id')->get();
 
-            return view('student_attendance.dashboard');
+            $stat['sub_nbr']=count($student_schedule);
+            $stat['att_nbr']=count($studentatt);
+            return view('student_attendance.dashboard',compact('stat'));
         }
     }
 }
