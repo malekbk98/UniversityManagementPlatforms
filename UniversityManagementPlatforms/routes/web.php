@@ -20,12 +20,28 @@ Auth::routes();
 
 
 Route::middleware('auth')->group(function () {
+
+// add subject review******
+Route::resource('/reviewSubjectt','SubjectController');
+Route::post('/review_Subject','SubjectController@add_subject_review')->name('review_Subject.add_subject_review');
+//*********
+
+// add Teacher review******
+Route::resource('/reviewTeacher','TeacherController');
+Route::post('/review_Teacher','TeacherController@add_Teacher_review')->name('review_Teacher.add_Teacher_review');
+//*********         End Students Reviews *************** /
+/******** students Notif *************** */
+Route::get('/TeacherListNotif','TeacherController@TeacherNotifList')->name('TeacherListNotif.TeacherNotifList');
+
+
+/* *************** end students Notif ************/
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource ('/student_attendance', 'StudentAttendanceController');
     Route::get('/home', 'HomeController@index')->name('home');
 
     /************************************ Admin Routes ****************************************/
     //Teacher routes
+    Route::group(['middleware' => ['auth', 'admin']],function(){
     Route::get ('/teachers_review','TeacherController@reviews')->name('teachers_review.reviews');
     Route::get ('/teachers_lists','TeacherController@lists')->name('teachers_lists.lists');
     Route::get('/teachers_index', 'TeacherController@home')->name('teachers_index.home');
@@ -107,8 +123,10 @@ Route::middleware('auth')->group(function () {
     //User rootes
     Route::get ('/user_create','Auth\RegisterController@view')->name('user_create.view');
     Route::post ('/user_create','Auth\RegisterController@post')->name('user_create.post');
+});
     /************************************ End Admin Routes **************************************/
     /************************************ Teacher Routes ****************************************/
+    Route::group(['middleware' => ['auth', 'teacher']],function(){
     Route::resource ('/student_attendance', 'StudentAttendanceController');
     Route::resource ('/schedule', 'LessonController');
     Route::get ('/class', 'ClasseController@teacherclasselist')->name('classelist');
@@ -116,6 +134,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource ('/teacher_attendance', 'TeacherAttendanceController');
     Route::post('/class_attendance','StudentAttendanceController@addattendance')->name('class_attendance');
+});
     /************************************ End Teacher Routes **************************************/
 
     /**************************************** Students Reviews ********************* */

@@ -42,7 +42,7 @@ class SubjectController extends Controller
         $x->nbr_review++;
         $x->save();
 
-        return redirect('reviewSubjectt');
+        return redirect('reviewSubjectt')->with('alert', 'Review Sent successfully!');
     
     }
 

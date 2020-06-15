@@ -5,7 +5,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Subjects Reviews</h1>
+              <h1>Teacher Reviews</h1>
             </div>
           </div>
         </div>
@@ -24,7 +24,8 @@
                   <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th>Teacher Name</th>
+                        <th>Teacher FirtName</th>
+                        <th>Teacher LastName</th>
                         <th>position</th>
                         <th>Review</th>
                         <th>Add Review</th>
@@ -33,7 +34,8 @@
                     <tbody>
                       @foreach($teacher_review as $teacher)
                       <tr>
-                      <td>{{$teacher->first_name}}</td>
+                      <td>{{$teacher->user->first_name}}</td>
+                      <td>{{$teacher->user->last_name}}</td>
                         <td>{{$teacher->position}}</td>
                         <td width='20%' style="color:orange">
                           @if($teacher->nbr_review==0)
@@ -61,7 +63,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">tape your review</h5>
+              <h5 class="modal-title" id="exampleModalLabel">tap your review</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
