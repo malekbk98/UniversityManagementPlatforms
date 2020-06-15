@@ -229,9 +229,9 @@
             @elseif(auth::user()->position=='teacher')
           <li class="nav-header">Check your attendances</li>
             <li class="nav-item">
-              <a href="{{route('teacher_attendance.index')}}" class="nav-link {{(\Request::is('teachers_attendance')) ? 'active' : '' }}">
+              <a href="{{route('teacher_attendance.index')}}" class="nav-link {{(\Request::is('teacher_attendance')) ? 'active' : '' }}">
                 <i class="fas fa-chalkboard-teacher"></i>
-                <p>Teachers attendances</p>
+                <p>Teacher attendances</p>
               </a>
           </li>
           <li class="nav-header">Check your schedule</li>
@@ -262,7 +262,7 @@
               </a>
           </li>
           <li class="nav-item">
-            <a href="{{Route('reviewSubjectt.index')}}" class="nav-link" {{(\Request::is('reviewSubjectt')) ? 'active' : '' }}>
+            <a href="{{Route('reviewSubjectt.index')}}" class="nav-link {{(\Request::is('reviewSubjectt')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Subject Review

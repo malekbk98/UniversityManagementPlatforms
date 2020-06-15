@@ -31,7 +31,6 @@ Route::get('/TeacherListNotif','TeacherController@TeacherNotifList')->name('Teac
 
 /* *************** end students Notif ************/
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::resource ('/student_attendance', 'StudentAttendanceController');
 
     /************************************ Admin Routes ****************************************/
     //Teacher routes
@@ -41,7 +40,7 @@ Route::get('/TeacherListNotif','TeacherController@TeacherNotifList')->name('Teac
     Route::get('/teachers_index', 'TeacherController@home')->name('teachers_index.home');
     Route::get('/teachers_edit', 'TeacherController@edit')->name('teachers_edit.edit');
     Route::get('/teachers_create', 'TeacherController@create')->name('teachers_create.create');
-    Route::get('/teachers/{id}', 'TeacherController@view')->name('teachers.view');
+    Route::get('/teacherss/{id}', 'TeacherController@view')->name('teacherss.view');
     Route::resource ('/teachers','TeacherController');
 
     //Student rootes
@@ -68,9 +67,6 @@ Route::get('/TeacherListNotif','TeacherController@TeacherNotifList')->name('Teac
     //Subject routes
     Route::get ('/subjects_review','SubjectController@reviews')->name('subjects_review.reviews');
     Route::resource ('/subjects','SubjectController');
-    Route::get('/profil','UserController@index')->name('profil');
-    Route::resource('/profile','UserController');
-
 
     //Dep rootes
     Route::get('/departments_index', 'DepartmentController@index')->name('departments_index.index');
@@ -79,22 +75,7 @@ Route::get('/TeacherListNotif','TeacherController@TeacherNotifList')->name('Teac
     Route::get('/departments_create', 'DepartmentController@create')->name('departments_create.create');
     Route::resource ('/departments','DepartmentController');
 
-
-    //Notif rootes
-    Route::post ('/store_report','NotifController@store')->name('notif.report');
-    Route::post ('/notif_grp','NotifController@notif_group')->name('notif_grp.notif_group');
-    
-    //User rootes
-    Route::get ('/user_create','Auth\RegisterController@view')->name('user_create.view');
-    Route::post ('/user_create','Auth\RegisterController@post')->name('user_create.post');
     /************************************ End Admin Routes **************************************/
-
-    //Dep routes
-    Route::get('/departments_index', 'DepartmentController@index')->name('departments_index.index');
-    Route::get('/departments_show', 'DepartmentController@show')->name('departments_show.show');
-    Route::get('/departments_edit', 'DepartmentController@edit')->name('departments_edit.edit');
-    Route::get('/departments_create', 'DepartmentController@create')->name('departments_create.create');
-    Route::resource ('/departments','DepartmentController');
 
     //Classe routes
     Route::get('/classes_index', 'ClasseController@index')->name('classes_index.index');
@@ -124,8 +105,11 @@ Route::get('/TeacherListNotif','TeacherController@TeacherNotifList')->name('Teac
 });
     /************************************ End Teacher Routes **************************************/
 
+    Route::group(['middleware' => ['auth', 'student']],function(){
     /**************************************** Students Reviews ********************* */
     // add subject review******
+    Route::post ('/store_report','NotifController@store')->name('notif.report');
+    Route::resource ('/teachers','TeacherController');
     Route::resource('/reviewSubjectt','SubjectController');
     Route::post('/review_Subject','SubjectController@add_subject_review')->name('review_Subject.add_subject_review');
     //*********
@@ -133,15 +117,15 @@ Route::get('/TeacherListNotif','TeacherController@TeacherNotifList')->name('Teac
     // add Teacher review******
     //*********         End Students Reviews *************** /
     Route::get('/noteUpdate','NotifController@seen')->name('noteUpdate.seen');
+        //Schedule routes
+        Route::get('/schedule_index', 'LessonController@home')->name('schedule_index.home');
+        Route::get('/schedule_edit', 'LessonController@edit')->name('schedule_edit.edit');
+        Route::get('/schedule_create', 'LessonController@create')->name('schedule_create.create');
+        Route::resource ('/schedules', 'LessonController');
+        Route::get ('/schedule_student', 'LessonController@index1')->name('schedule_student.index1');
+        Route::resource ('/student_attendance', 'StudentAttendanceController');
 
-
-    //Schedule routes
-    Route::get('/schedule_index', 'LessonController@home')->name('schedule_index.home');
-    Route::get('/schedule_edit', 'LessonController@edit')->name('schedule_edit.edit');
-    Route::get('/schedule_create', 'LessonController@create')->name('schedule_create.create');
-    Route::resource ('/schedules', 'LessonController');
-    Route::get ('/schedule_student', 'LessonController@index1')->name('schedule_student.index1');
-  
+    });
     View::composer('layouts.Menu', function( $view ){
         $user = auth::user();
         $notif= Notif::where('user_id','=',$user->id)->get();
@@ -153,4 +137,6 @@ Route::get('/TeacherListNotif','TeacherController@TeacherNotifList')->name('Teac
         }
         $view->with(compact('user','notif','nbrs'));
     });
+    Route::get('/profil','UserController@index')->name('profil');
+    Route::resource('/profile','UserController');
 });

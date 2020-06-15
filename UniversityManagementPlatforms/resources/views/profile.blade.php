@@ -29,7 +29,7 @@
 <div class="form-group row">
     <label for="colFormLabel" class="col-sm-2 col-form-label">Date of birthday</label>
     <div class="col-sm-10">
-      <input type="date" class="form-control" value=" " disabled>
+      <input type="date" class="form-control" value="{{$user->birthday}}" disabled>
     </div>
   </div> 
    <div class="form-group row">
