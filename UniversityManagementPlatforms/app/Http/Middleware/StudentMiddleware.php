@@ -15,7 +15,7 @@ class StudentMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()->position != 'student') {
+        if (!Auth::user()->position == 'student') {
             return redirect('home');
         }
         return $next($request);
