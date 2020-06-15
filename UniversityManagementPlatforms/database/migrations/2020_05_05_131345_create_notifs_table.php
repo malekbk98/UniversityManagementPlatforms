@@ -18,7 +18,7 @@ class CreateNotifsTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->string('title');
             $table->string('message');
-            $table->string('status');
+            $table->string('status')->default('new');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

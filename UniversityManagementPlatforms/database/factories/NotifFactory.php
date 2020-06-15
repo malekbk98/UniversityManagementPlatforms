@@ -11,7 +11,6 @@ $factory->define(Notif::class, function (Faker $faker) {
         'user_id' => User::get('id')->random(),
         'title' => $faker->sentence,
         'message' => $faker->sentence,
-        'status' => $faker->sentence,
         'created_at' => now(),        
     ];
 });
