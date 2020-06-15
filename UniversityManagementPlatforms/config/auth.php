@@ -39,7 +39,6 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
-            'model' => App\User::class,
         ],
 
         'api' => [
